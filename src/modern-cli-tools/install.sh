@@ -87,7 +87,7 @@ fi
 # zoxide
 if [ "${ZOXIDE}" != "false" ]; then
     echo "Installing zoxide..."
-    curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash -s -- -b /usr/local/bin
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh -s -- --bin-dir /usr/local/bin
 fi
 
 # lazygit
