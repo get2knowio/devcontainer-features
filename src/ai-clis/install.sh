@@ -80,12 +80,16 @@ if [ "${SPECIFYCLI}" != "false" ]; then
     # Ensure uv is available
     if command -v uv >/dev/null 2>&1; then
         UV_BIN="$(command -v uv)"
+    elif [ -f "$_REMOTE_USER_HOME/.local/bin/uv" ]; then
+        UV_BIN="$_REMOTE_USER_HOME/.local/bin/uv"
     else
         echo "uv not found; installing via Astral script..."
-        su - "$_REMOTE_USER" -c 'curl -Ls https://astral.sh/uv/install.sh | sh'
-        UV_BIN="$_REMOTE_USER_HOME/.local/bin/uv"
+        curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
+        ln -sf /root/.local/bin/uv /usr/local/bin/uv
+        ln -sf /root/.local/bin/uvx /usr/local/bin/uvx
+        UV_BIN="/usr/local/bin/uv"
     fi
-    # Ensure ~/.local/bin on PATH
+    # Ensure ~/.local/bin on PATH for user-installed tools
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$_REMOTE_USER_HOME/.zshrc"
     su - "$_REMOTE_USER" -c "\"$UV_BIN\" tool install specify-cli --from git+https://github.com/github/spec-kit.git" || echo "Warning: Specify CLI installation failed"
 fi
