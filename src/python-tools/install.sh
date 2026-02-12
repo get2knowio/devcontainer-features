@@ -46,16 +46,23 @@ if [ "${POETRY}" != "false" ]; then
     fi
 fi
 
+# Prefer uv for installing Python tools; fall back to pip
+if command -v uv >/dev/null 2>&1; then
+    PY_INSTALL="uv tool install"
+else
+    PY_INSTALL="pip install --break-system-packages"
+fi
+
 # ruff - fast Python linter and formatter
 if [ "${RUFF}" != "false" ]; then
     echo "Installing ruff..."
-    pip install ruff
+    $PY_INSTALL ruff
 fi
 
 # mypy - static type checker
 if [ "${MYPY}" != "false" ]; then
     echo "Installing mypy..."
-    pip install mypy
+    $PY_INSTALL mypy
 fi
 
 echo "Python development tools installation complete."

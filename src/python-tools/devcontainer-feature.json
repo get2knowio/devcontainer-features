@@ -1,6 +1,6 @@
 {
     "id": "python-tools",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "name": "Python Development Tools",
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/python-tools",
     "description": "Installs Python development tools: uv, Poetry, ruff, and mypy.",
