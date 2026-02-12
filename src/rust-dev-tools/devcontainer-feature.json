@@ -1,0 +1,27 @@
+{
+    "id": "rust-dev-tools",
+    "version": "1.0.0",
+    "name": "Rust Development Tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/rust-dev-tools",
+    "description": "Installs Rust development tools: bacon (build watcher), cargo-edit, and cargo-audit.",
+    "options": {
+        "bacon": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install bacon (cargo build watcher, replaces cargo-watch)"
+        },
+        "cargoEdit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install cargo-edit (cargo add/rm/upgrade)"
+        },
+        "cargoAudit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install cargo-audit (security vulnerability checker)"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/rust"
+    ]
+}

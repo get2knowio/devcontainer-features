@@ -1,0 +1,37 @@
+{
+    "id": "node-dev-tools",
+    "version": "1.0.0",
+    "name": "Node.js Development Tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/node-dev-tools",
+    "description": "Installs TypeScript toolchain, bundlers, linters, file watchers, and Bun runtime for Node.js development.",
+    "options": {
+        "typescript": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install TypeScript, ts-node, tsx, and @types/node"
+        },
+        "bundlers": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install vite and esbuild"
+        },
+        "linters": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install prettier, eslint, and biome"
+        },
+        "watchers": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install nodemon, tsc-watch, and concurrently"
+        },
+        "bun": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Bun JavaScript runtime"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/node"
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "typescript_only": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "node-dev-tools": {
+                "typescript": true,
+                "bundlers": false,
+                "linters": false,
+                "watchers": false,
+                "bun": false
+            }
+        }
+    },
+    "no_bun": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/node:1": {},
+            "node-dev-tools": {
+                "bun": false
+            }
+        }
+    }
+}

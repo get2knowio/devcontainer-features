@@ -1,32 +1,24 @@
 #!/bin/bash
-
-# Setup script for DevContainer Base Testing Environment
-# This script installs the DevContainer CLI and other testing tools
-
 set -e
 
-echo "🔧 Setting up DevContainer testing environment..."
+echo "Setting up DevContainer feature development environment..."
 
 # Install DevContainer CLI globally
-echo "📦 Installing DevContainer CLI..."
+echo "Installing DevContainer CLI..."
 npm install -g @devcontainers/cli
 
-# Verify DevContainer CLI installation
-echo "✅ DevContainer CLI version:"
+# Verify installation
+echo "DevContainer CLI version:"
 devcontainer --version
 
-# Make test scripts executable
-chmod +x scripts/test.sh
-
 # Verify Docker access
-echo "🐳 Verifying Docker access..."
-docker version
-docker info
+echo "Verifying Docker access..."
+docker version --format '{{.Server.Version}}'
 
-echo "🎉 DevContainer testing environment setup complete!"
+echo ""
+echo "Development environment ready!"
 echo ""
 echo "Available commands:"
-echo "  devcontainer --help    # DevContainer CLI help"
-echo "  build                  # Build the containers"
-echo "  test                   # Run container tests"
-echo "  docker version         # Verify Docker access"
+echo "  devcontainer features test --features <name> .    # Test a single feature"
+echo "  devcontainer features test --global-scenarios-only .  # Test all features together"
+echo "  devcontainer features test .                      # Run all tests"

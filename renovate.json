@@ -20,50 +20,10 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
+        "/^src/github-actions-tools/devcontainer-feature\\.json$/"
       ],
       "matchStrings": [
-        "ARG NVM_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG NVM_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
-      ],
-      "depNameTemplate": "nvm-sh/nvm",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
-      ],
-      "matchStrings": [
-        "ARG POETRY_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG POETRY_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
-      ],
-      "depNameTemplate": "python-poetry/poetry",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
-      ],
-      "matchStrings": [
-        "ARG EZA_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG EZA_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
-      ],
-      "depNameTemplate": "eza-community/eza",
-      "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^v?(?<version>.*)$"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
-      ],
-      "matchStrings": [
-        "ARG ACT_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG ACT_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
+        "\"actVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
       ],
       "depNameTemplate": "nektos/act",
       "datasourceTemplate": "github-releases",
@@ -72,11 +32,10 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
+        "/^src/github-actions-tools/devcontainer-feature\\.json$/"
       ],
       "matchStrings": [
-        "ARG ACTIONLINT_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG ACTIONLINT_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
+        "\"actionlintVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
       ],
       "depNameTemplate": "rhysd/actionlint",
       "datasourceTemplate": "github-releases",
@@ -85,36 +44,10 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
+        "/^src/modern-cli-tools/devcontainer-feature\\.json$/"
       ],
       "matchStrings": [
-        "ARG AST_GREP_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG AST_GREP_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
-      ],
-      "depNameTemplate": "ast-grep/ast-grep",
-      "datasourceTemplate": "github-releases"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
-      ],
-      "matchStrings": [
-        "ARG ZELLIJ_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG ZELLIJ_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
-      ],
-      "depNameTemplate": "zellij-org/zellij",
-      "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^v?(?<version>.*)$"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
-      ],
-      "matchStrings": [
-        "ARG LAZYGIT_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG LAZYGIT_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
+        "\"lazygitVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
       ],
       "depNameTemplate": "jesseduffield/lazygit",
       "datasourceTemplate": "github-releases",
@@ -123,42 +56,40 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^containers/default/Dockerfile$/"
+        "/^src/modern-cli-tools/devcontainer-feature\\.json$/"
       ],
       "matchStrings": [
-        "ARG GH_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
-        "ARG GH_VERSION='?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
+        "\"astGrepVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
       ],
-      "depNameTemplate": "cli/cli",
+      "depNameTemplate": "ast-grep/ast-grep",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^src/modern-cli-tools/devcontainer-feature\\.json$/"
+      ],
+      "matchStrings": [
+        "\"zellijVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "depNameTemplate": "zellij-org/zellij",
       "datasourceTemplate": "github-releases",
       "extractVersionTemplate": "^v?(?<version>.*)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^src/python-tools/devcontainer-feature\\.json$/"
+      ],
+      "matchStrings": [
+        "\"poetryVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "depNameTemplate": "python-poetry/poetry",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ],
   "packageRules": [
-    {
-      "matchManagers": [
-        "dockerfile"
-      ],
-      "matchPackageNames": [
-        "mcr.microsoft.com/devcontainers/python"
-      ],
-      "groupName": "base image",
-      "labels": [
-        "dependencies",
-        "devcontainer",
-        "base-image"
-      ],
-      "pinDigests": true,
-      "matchUpdateTypes": [
-        "major",
-        "minor"
-      ],
-      "enabled": false,
-      "schedule": [
-        "before 6am on monday"
-      ],
-      "automerge": false
-    },
     {
       "matchDatasources": [
         "github-releases"
@@ -217,21 +148,6 @@
       ],
       "automerge": true,
       "automergeType": "pr"
-    },
-    {
-      "matchManagers": [
-        "dockerfile"
-      ],
-      "groupName": "base image",
-      "labels": [
-        "dependencies",
-        "devcontainer",
-        "base-image"
-      ],
-      "schedule": [
-        "before 6am on monday"
-      ],
-      "automerge": false
     }
   ]
 }

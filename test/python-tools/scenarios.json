@@ -1,0 +1,12 @@
+{
+    "poetry_only": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/python:1": {},
+            "python-tools": {
+                "poetry": true,
+                "specifyCli": false
+            }
+        }
+    }
+}

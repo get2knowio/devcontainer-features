@@ -1,0 +1,20 @@
+{
+    "act_only": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "github-actions-tools": {
+                "act": true,
+                "actionlint": false
+            }
+        }
+    },
+    "actionlint_only": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "github-actions-tools": {
+                "act": false,
+                "actionlint": true
+            }
+        }
+    }
+}

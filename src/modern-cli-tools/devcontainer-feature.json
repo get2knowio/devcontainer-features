@@ -1,0 +1,84 @@
+{
+    "id": "modern-cli-tools",
+    "version": "1.0.0",
+    "name": "Modern CLI Tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/modern-cli-tools",
+    "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, and optionally zellij.",
+    "options": {
+        "bat": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install bat (cat replacement with syntax highlighting)"
+        },
+        "ripgrep": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install ripgrep (fast grep replacement)"
+        },
+        "fd": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install fd (fast find replacement)"
+        },
+        "fzf": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install fzf (fuzzy finder)"
+        },
+        "eza": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install eza (modern ls replacement)"
+        },
+        "zoxide": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install zoxide (smart cd replacement)"
+        },
+        "neovim": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install neovim"
+        },
+        "tmux": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install tmux (terminal multiplexer)"
+        },
+        "lazygit": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install lazygit (Git TUI)"
+        },
+        "astGrep": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install ast-grep (structural search tool)"
+        },
+        "zellij": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install zellij (terminal workspace)"
+        },
+        "ezaVersion": {
+            "type": "string",
+            "default": "latest",
+            "description": "Version of eza to install"
+        },
+        "lazygitVersion": {
+            "type": "string",
+            "default": "0.59.0",
+            "description": "Version of lazygit to install"
+        },
+        "astGrepVersion": {
+            "type": "string",
+            "default": "0.40.5",
+            "description": "Version of ast-grep to install"
+        },
+        "zellijVersion": {
+            "type": "string",
+            "default": "0.43.1",
+            "description": "Version of zellij to install"
+        }
+    }
+}

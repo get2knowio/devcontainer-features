@@ -1,118 +1,87 @@
-# Contributing / Internal Documentation
+# Contributing
 
-This document explains how the unified devcontainer image is structured, built, and tested. The README focuses on **using** the environment; this file focuses on **maintaining** it.
+This document covers the development workflow for the DevContainer Feature Collection.
 
-## Contents
-- Overview
-- Build & Tags
-- Multi-arch Strategy
-- Version Overrides
-- Test Workflow
-- CI Workflow Details
-- Development Scripts
-- Adding / Updating Tools
-- Node & nvm Strategy
-- Troubleshooting (advanced)
-- Migration History
+## Project Structure
 
----
-## Overview
-Source lives under `containers/default/`:
-- `Dockerfile` – installs system tooling, Node via nvm, global TS/AI CLIs, poetry, Rust aliases
-- `.devcontainer/devcontainer.json` – adds features (docker-in-docker, aws-cli, rust, jq-likes, uv)
-
-Goals:
-- Single image for Python + TypeScript + Rust work
-- Minimal repeated logic (feature-first approach where possible)
-- Fast local single-arch builds; CI multi-arch publication
-
-## Build & Tags
-Wrapper script: `./build`
-Environment knobs:
-- `PLATFORM` – e.g. `linux/amd64`, `linux/arm64`, or multi via CI buildx
-- `NO_CACHE=true` – disable build cache
-- `PUSH=true` with `IMAGE_TAG` – push after build (CI normally)
-
-## Multi-arch Strategy
-GitHub Actions workflow builds `linux/amd64,linux/arm64` using buildx and QEMU. Local builds default to host arch for speed. Tag promotion logic handled in workflow helper scripts.
-
-## Version Overrides
-Overridable Docker build args (see Dockerfile):
-- `ACT_VERSION`
-- `ACTIONLINT_VERSION`
-- `AST_GREP_VERSION`
-- `EZA_VERSION`
-- `NVM_VERSION`
-- `POETRY_VERSION`
-- `INSTALL_AI_CLIS` (default: `true`) - Controls AI CLI installation
-- `INSTALL_HEAVY_TOOLS` (default: `true`) - Controls heavy tools (act, actionlint, ast-grep, zellij, lazygit, gh)
-
-Example:
 ```
-docker build --build-arg ACT_VERSION=v0.2.69 -t devcontainer:test containers/default
-# Build without heavy tools to save space/time
-docker build --build-arg INSTALL_HEAVY_TOOLS=false -t devcontainer:minimal containers/default
+src/
+  <feature>/
+    devcontainer-feature.json   # Feature metadata and options
+    install.sh                  # Installation script
+test/
+  <feature>/
+    test.sh                     # Default options smoke test
+    scenarios.json              # Custom option test scenarios
+    <scenario>.sh               # Scenario verification script
+  _global/
+    scenarios.json              # All-features composition test
+    all_features.sh             # Cross-feature smoke test
+.github/workflows/
+  test.yaml                     # Feature testing CI
+  release.yaml                  # Publish features to GHCR
+  validate.yml                  # JSON schema validation
+examples/
+  full-stack.devcontainer.json  # Composable full-stack example
 ```
 
-## Test Workflow
-`scripts/test.sh` validates core expectations:
-- CLI presence (node, npm, poetry, docker, act, actionlint, ast-grep, neovim)
-- AI CLIs (if enabled)
-- PID1 is one of allowed list (sleep etc.)
-- DinD optional smoke (can be skipped with `DIND_TESTS=false`)
+## Adding a New Feature
 
-`./test` wrapper runs it against the freshly built (or provided) image.
+1. Create `src/<feature-name>/devcontainer-feature.json` with metadata, options, and `installsAfter` dependencies
+2. Create `src/<feature-name>/install.sh` with the installation logic
+3. Create test files under `test/<feature-name>/`
+4. Add the feature to `test/_global/scenarios.json` and `all_features.sh`
+5. Update `examples/full-stack.devcontainer.json`
+6. If the feature has versioned tools, add Renovate custom managers to `renovate.json`
 
-## CI Workflow Details
-Workflow file: `.github/workflows/docker-build-push.yml`
-Modes:
-- `ci` (in Actions): multi-arch, push, tag+promote
-- `local-act` (via `./run-local`): single-arch, no push
+## Feature Development Guidelines
 
-Helpers orchestrate these phases:
-- `./ci-env` – sets MODE and writes cache file
-- `./build-image` – performs buildx build if MODE=ci
-- `./test-image` – runs validation
-- `./promote-image` – tags & manifest creation (noop outside real CI)
+- **Options**: Use boolean options (default `true`) for individual tools, string options for versions
+- **Architecture**: Handle both `amd64` and `arm64` via `dpkg --print-architecture`
+- **Shell config**: Append aliases/init to `$_REMOTE_USER_HOME/.zshrc`
+- **User context**: Use `su - "$_REMOTE_USER"` for user-scoped installs (cargo, bun, etc.)
+- **Idempotency**: Scripts should handle being run multiple times gracefully
+- **Error handling**: Use `set -e` and provide warnings for non-critical failures
 
-## Development Scripts
-All real scripts live in `scripts/` with thin root wrappers (see `copilot-instructions.md`).
-Add new automation there to keep root clean and consistent.
+## Testing Locally
 
-## Adding / Updating Tools
-Preference order:
-1. Devcontainer feature (if one exists & mature)
-2. Apt package (if stable and recent enough)
-3. Direct release download (pin via ARG)
+Prerequisites: Docker, Node.js 22+, `@devcontainers/cli` installed globally.
 
-When adding a release download:
-- Add ARG for version
-- Handle `amd64` vs `arm64` naming differences
-- Place binary in `/usr/local/bin`
-- Add minimal verification in `scripts/test.sh`
+```bash
+# Test a single feature with default options
+devcontainer features test --features <feature-name> --base-image mcr.microsoft.com/devcontainers/base:ubuntu .
 
-## Node & nvm Strategy
-We rely on interactive zsh shells for `nvm` environment initialization:
-- `.zshrc` exports `NVM_DIR`, sources `nvm.sh`, runs a silent `nvm use` line
-- No `/etc/profile.d` hacks; non-interactive shells must bootstrap manually
+# Test feature scenarios (custom option combos)
+devcontainer features test --features <feature-name> --skip-autogenerated .
 
-Testing patterns (examples):
-```
-# Interactive (preferred)
-docker run -it --rm IMAGE zsh -lic 'node -v && which eslint'
-# Explicit bootstrap (bash)
-docker run --rm IMAGE bash -lc 'export NVM_DIR=$HOME/.nvm; . "$NVM_DIR/nvm.sh"; nvm use --silent default; node -v'
+# Test all features composed together
+devcontainer features test --global-scenarios-only .
+
+# Run all tests
+devcontainer features test .
 ```
 
-## Troubleshooting (advanced)
-See README for user-facing guidance. Internal tips:
-- Asset 404: verify release naming pattern for both arches
-- Node global binary missing: confirm shell is interactive login
-- Docker feature flakiness: rerun; network often transient
+## CI/CD
 
-## Migration History
-- v2.0 Unified architecture: merged language-specific images into single base
-- Introduced multi-arch build + act local workflow path
+### Testing (`test.yaml`)
+Runs on push/PR to main when `src/**` or `test/**` change:
+- **test-autogenerated**: Matrix of 6 features x base image, runs default-option tests
+- **test-scenarios**: Matrix of 6 features, runs custom option scenario tests
+- **test-global**: Runs the all-features composition test
+
+### Release (`release.yaml`)
+Manual workflow dispatch (main branch only):
+- Publishes all features as OCI artifacts to `ghcr.io`
+- Generates feature documentation
+- Creates PR for auto-generated README files
+
+### Validation (`validate.yml`)
+Runs on PRs that modify `devcontainer-feature.json` files.
+
+## Renovate
+
+Custom regex managers in `renovate.json` track version defaults in feature JSON files. When updating a tool version default, Renovate will automatically detect it and open PRs.
 
 ## License
-See `LICENSE`.
+
+See [LICENSE](LICENSE).

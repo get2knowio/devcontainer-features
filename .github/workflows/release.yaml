@@ -1,0 +1,34 @@
+name: "Release Dev Container Features"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish and generate docs
+        uses: devcontainers/action@v1
+        with:
+          publish-features: "true"
+          generate-docs: "true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create PR for generated docs
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "docs: auto-update feature documentation"
+          title: "docs: auto-update feature documentation"
+          body: |
+            Auto-generated documentation update from feature release.
+          branch: docs/auto-update
+          base: main

@@ -1,0 +1,13 @@
+{
+    "bacon_only": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/rust:1": {},
+            "rust-dev-tools": {
+                "bacon": true,
+                "cargoEdit": false,
+                "cargoAudit": false
+            }
+        }
+    }
+}

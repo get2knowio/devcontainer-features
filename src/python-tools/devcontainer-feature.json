@@ -1,0 +1,32 @@
+{
+    "id": "python-tools",
+    "version": "1.0.0",
+    "name": "Python Development Tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/python-tools",
+    "description": "Installs Python development tools: Poetry (dependency management) and Specify CLI (spec-kit).",
+    "options": {
+        "poetry": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Poetry package manager"
+        },
+        "specifyCli": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Specify CLI (spec-kit) via uv"
+        },
+        "poetryVersion": {
+            "type": "string",
+            "default": "2.3.2",
+            "description": "Version of Poetry to install"
+        },
+        "inProjectVenvs": {
+            "type": "boolean",
+            "default": true,
+            "description": "Configure Poetry to create virtualenvs in project directory"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/python"
+    ]
+}

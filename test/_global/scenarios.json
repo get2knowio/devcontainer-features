@@ -1,0 +1,16 @@
+{
+    "all_features": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/python:1": {},
+            "ghcr.io/devcontainers/features/node:1": {},
+            "ghcr.io/devcontainers/features/rust:1": {},
+            "ai-clis": {},
+            "modern-cli-tools": {},
+            "node-dev-tools": {},
+            "rust-dev-tools": {},
+            "github-actions-tools": {},
+            "python-tools": {}
+        }
+    }
+}
