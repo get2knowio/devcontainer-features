@@ -5,6 +5,12 @@
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
     "description": "Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads, and Specify CLI.",
     "options": {
+        "installMode": {
+            "type": "string",
+            "enum": ["all", "selected"],
+            "default": "all",
+            "description": "Install mode: 'all' installs every CLI unless explicitly disabled, 'selected' installs only CLIs explicitly set to true"
+        },
         "claudeCode": {
             "type": "boolean",
             "default": true,
