@@ -6,6 +6,7 @@ Installs Rust development tools: bacon (build watcher), cargo-edit, and cargo-au
 
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
+| `install` | Comma-separated list of tools to install (e.g. `"bacon"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
 | `bacon` | Install bacon (cargo build watcher, replaces cargo-watch) | boolean | `true` |
 | `cargoEdit` | Install cargo-edit (cargo add/rm/upgrade) | boolean | `true` |
 | `cargoAudit` | Install cargo-audit (security vulnerability checker) | boolean | `true` |
@@ -28,8 +29,7 @@ Add this feature to your `devcontainer.json`:
 {
   "features": {
     "ghcr.io/get2knowio/devcontainer-features/rust-dev-tools:1": {
-      "cargoEdit": false,
-      "cargoAudit": false
+      "install": "bacon"
     }
   }
 }

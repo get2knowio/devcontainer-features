@@ -6,6 +6,7 @@ Installs tools for local GitHub Actions development: act (local runner) and acti
 
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
+| `install` | Comma-separated list of tools to install (e.g. `"act"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
 | `act` | Install act (run GitHub Actions locally) | boolean | `true` |
 | `actionlint` | Install actionlint (GitHub Actions workflow linter) | boolean | `true` |
 | `actVersion` | Version of act to install | string | `0.2.84` |
@@ -23,14 +24,13 @@ Add this feature to your `devcontainer.json`:
 }
 ```
 
-### Pin specific versions
+### Install only actionlint
 
 ```jsonc
 {
   "features": {
     "ghcr.io/get2knowio/devcontainer-features/github-actions-tools:1": {
-      "actVersion": "0.2.80",
-      "actionlintVersion": "1.7.5"
+      "install": "actionlint"
     }
   }
 }

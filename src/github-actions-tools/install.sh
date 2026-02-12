@@ -5,8 +5,25 @@ echo "Installing GitHub Actions tools..."
 
 ARCH=$(dpkg --print-architecture)
 
+# If 'install' is set, only install the listed tools (comma-separated).
+# Otherwise install everything unless individually disabled.
+if [ -n "${INSTALL}" ]; then
+    ACT="false"
+    ACTIONLINT="false"
+
+    IFS=',' read -ra SELECTED <<< "${INSTALL}"
+    for item in "${SELECTED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            act)        ACT="true" ;;
+            actionlint) ACTIONLINT="true" ;;
+            *) echo "Warning: unknown tool '$item' in install list" ;;
+        esac
+    done
+fi
+
 # act - run GitHub Actions locally
-if [ "${ACT}" = "true" ]; then
+if [ "${ACT}" != "false" ]; then
     echo "Installing act ${ACTVERSION}..."
     case "$ARCH" in
         amd64) ACT_ARCH="x86_64" ;;
@@ -19,7 +36,7 @@ if [ "${ACT}" = "true" ]; then
 fi
 
 # actionlint - GitHub Actions workflow linter
-if [ "${ACTIONLINT}" = "true" ]; then
+if [ "${ACTIONLINT}" != "false" ]; then
     echo "Installing actionlint ${ACTIONLINTVERSION}..."
     case "$ARCH" in
         amd64) ACTIONLINT_ARCH="amd64" ;;

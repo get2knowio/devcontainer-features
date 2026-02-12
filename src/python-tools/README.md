@@ -6,6 +6,7 @@ Installs Python development tools: uv, Poetry, ruff, and mypy.
 
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
+| `install` | Comma-separated list of tools to install (e.g. `"uv,ruff"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
 | `uv` | Install uv (fast Python package manager) | boolean | `true` |
 | `poetry` | Install Poetry package manager | boolean | `true` |
 | `ruff` | Install ruff (fast Python linter and formatter) | boolean | `true` |
@@ -25,14 +26,13 @@ Add this feature to your `devcontainer.json`:
 }
 ```
 
-### Use only uv and ruff
+### Install only uv and ruff
 
 ```jsonc
 {
   "features": {
     "ghcr.io/get2knowio/devcontainer-features/python-tools:1": {
-      "poetry": false,
-      "mypy": false
+      "install": "uv,ruff"
     }
   }
 }

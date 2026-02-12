@@ -9,20 +9,39 @@ if ! command -v cargo >/dev/null 2>&1; then
     exit 1
 fi
 
+# If 'install' is set, only install the listed tools (comma-separated).
+# Otherwise install everything unless individually disabled.
+if [ -n "${INSTALL}" ]; then
+    BACON="false"
+    CARGOEDIT="false"
+    CARGOAUDIT="false"
+
+    IFS=',' read -ra SELECTED <<< "${INSTALL}"
+    for item in "${SELECTED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            bacon)      BACON="true" ;;
+            cargoEdit)  CARGOEDIT="true" ;;
+            cargoAudit) CARGOAUDIT="true" ;;
+            *) echo "Warning: unknown tool '$item' in install list" ;;
+        esac
+    done
+fi
+
 # bacon (replaces archived cargo-watch)
-if [ "${BACON}" = "true" ]; then
+if [ "${BACON}" != "false" ]; then
     echo "Installing bacon..."
     su - "$_REMOTE_USER" -c 'cargo install bacon' || echo "Warning: bacon installation failed"
 fi
 
 # cargo-edit
-if [ "${CARGOEDIT}" = "true" ]; then
+if [ "${CARGOEDIT}" != "false" ]; then
     echo "Installing cargo-edit..."
     su - "$_REMOTE_USER" -c 'cargo install cargo-edit' || echo "Warning: cargo-edit installation failed"
 fi
 
 # cargo-audit
-if [ "${CARGOAUDIT}" = "true" ]; then
+if [ "${CARGOAUDIT}" != "false" ]; then
     echo "Installing cargo-audit..."
     su - "$_REMOTE_USER" -c 'cargo install cargo-audit' || echo "Warning: cargo-audit installation failed"
 fi

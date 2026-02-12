@@ -5,6 +5,11 @@
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/python-tools",
     "description": "Installs Python development tools: uv, Poetry, ruff, and mypy.",
     "options": {
+        "install": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of tools to install (e.g. 'uv,ruff'). When set, only the listed tools are installed. When empty (default), all tools are installed."
+        },
         "uv": {
             "type": "boolean",
             "default": true,

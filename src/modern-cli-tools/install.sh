@@ -5,14 +5,51 @@ echo "Installing modern CLI tools..."
 
 ARCH=$(dpkg --print-architecture)
 
+# If 'install' is set, only install the listed tools (comma-separated).
+# Otherwise install everything unless individually disabled.
+if [ -n "${INSTALL}" ]; then
+    BAT="false"
+    RIPGREP="false"
+    FD="false"
+    FZF="false"
+    EZA="false"
+    ZOXIDE="false"
+    NEOVIM="false"
+    TMUX="false"
+    LAZYGIT="false"
+    ASTGREP="false"
+    JUJUTSU="false"
+    ZELLIJ="false"
+
+    IFS=',' read -ra SELECTED <<< "${INSTALL}"
+    for item in "${SELECTED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            bat)      BAT="true" ;;
+            ripgrep)  RIPGREP="true" ;;
+            fd)       FD="true" ;;
+            fzf)      FZF="true" ;;
+            eza)      EZA="true" ;;
+            zoxide)   ZOXIDE="true" ;;
+            neovim)   NEOVIM="true" ;;
+            tmux)     TMUX="true" ;;
+            lazygit)  LAZYGIT="true" ;;
+            astGrep)  ASTGREP="true" ;;
+            jujutsu)  JUJUTSU="true" ;;
+            zellij)   ZELLIJ="true" ;;
+            *) echo "Warning: unknown tool '$item' in install list" ;;
+        esac
+    done
+fi
+
 # --- APT-based tools ---
 APT_PACKAGES=""
-if [ "${BAT}" = "true" ]; then APT_PACKAGES="$APT_PACKAGES bat"; fi
-if [ "${RIPGREP}" = "true" ]; then APT_PACKAGES="$APT_PACKAGES ripgrep"; fi
-if [ "${FD}" = "true" ]; then APT_PACKAGES="$APT_PACKAGES fd-find"; fi
-if [ "${FZF}" = "true" ]; then APT_PACKAGES="$APT_PACKAGES fzf"; fi
-if [ "${NEOVIM}" = "true" ]; then APT_PACKAGES="$APT_PACKAGES neovim"; fi
-if [ "${TMUX}" = "true" ]; then APT_PACKAGES="$APT_PACKAGES tmux"; fi
+if [ "${BAT}" != "false" ]; then APT_PACKAGES="$APT_PACKAGES bat"; fi
+if [ "${RIPGREP}" != "false" ]; then APT_PACKAGES="$APT_PACKAGES ripgrep"; fi
+if [ "${FD}" != "false" ]; then APT_PACKAGES="$APT_PACKAGES fd-find"; fi
+if [ "${FZF}" != "false" ]; then APT_PACKAGES="$APT_PACKAGES fzf"; fi
+if [ "${NEOVIM}" != "false" ]; then APT_PACKAGES="$APT_PACKAGES neovim"; fi
+if [ "${TMUX}" != "false" ]; then APT_PACKAGES="$APT_PACKAGES tmux"; fi
 
 if [ -n "$APT_PACKAGES" ]; then
     apt-get update -y
@@ -22,17 +59,17 @@ if [ -n "$APT_PACKAGES" ]; then
 fi
 
 # Create symlinks for apt tools
-if [ "${BAT}" = "true" ] && [ -f /usr/bin/batcat ]; then
+if [ "${BAT}" != "false" ] && [ -f /usr/bin/batcat ]; then
     ln -sf /usr/bin/batcat /usr/bin/bat
 fi
-if [ "${FD}" = "true" ] && [ -f /usr/bin/fdfind ]; then
+if [ "${FD}" != "false" ] && [ -f /usr/bin/fdfind ]; then
     ln -sf /usr/bin/fdfind /usr/bin/fd
 fi
 
 # --- GitHub release tools ---
 
 # eza
-if [ "${EZA}" = "true" ]; then
+if [ "${EZA}" != "false" ]; then
     echo "Installing eza..."
     case "$ARCH" in
         amd64) EZA_ARCH="x86_64" ;;
@@ -48,13 +85,13 @@ if [ "${EZA}" = "true" ]; then
 fi
 
 # zoxide
-if [ "${ZOXIDE}" = "true" ]; then
+if [ "${ZOXIDE}" != "false" ]; then
     echo "Installing zoxide..."
     curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash -s -- -b /usr/local/bin
 fi
 
 # lazygit
-if [ "${LAZYGIT}" = "true" ]; then
+if [ "${LAZYGIT}" != "false" ]; then
     echo "Installing lazygit ${LAZYGITVERSION}..."
     case "$ARCH" in
         amd64) LG_ARCH="x86_64" ;;
@@ -69,7 +106,7 @@ if [ "${LAZYGIT}" = "true" ]; then
 fi
 
 # ast-grep
-if [ "${ASTGREP}" = "true" ]; then
+if [ "${ASTGREP}" != "false" ]; then
     echo "Installing ast-grep ${ASTGREPVERSION}..."
     case "$ARCH" in
         amd64) SG_ARCH="x86_64" ;;
@@ -85,7 +122,7 @@ if [ "${ASTGREP}" = "true" ]; then
 fi
 
 # jujutsu (jj) - next-gen Git-compatible VCS
-if [ "${JUJUTSU}" = "true" ]; then
+if [ "${JUJUTSU}" != "false" ]; then
     echo "Installing jujutsu ${JUJUTSUVERSION}..."
     case "$ARCH" in
         amd64) JJ_ARCH="x86_64" ;;
@@ -100,7 +137,7 @@ if [ "${JUJUTSU}" = "true" ]; then
 fi
 
 # zellij (optional, default false)
-if [ "${ZELLIJ}" = "true" ]; then
+if [ "${ZELLIJ}" != "false" ]; then
     echo "Installing zellij ${ZELLIJVERSION}..."
     case "$ARCH" in
         amd64) ZELLIJ_ARCH="x86_64" ;;
@@ -116,13 +153,13 @@ fi
 # --- Shell configuration ---
 ZSHRC="$_REMOTE_USER_HOME/.zshrc"
 
-if [ "${EZA}" = "true" ]; then
+if [ "${EZA}" != "false" ]; then
     echo 'alias ls="eza --icons"' >> "$ZSHRC"
     echo 'alias ll="eza -l --icons"' >> "$ZSHRC"
     echo 'alias la="eza -la --icons"' >> "$ZSHRC"
 fi
 
-if [ "${ZOXIDE}" = "true" ]; then
+if [ "${ZOXIDE}" != "false" ]; then
     echo 'eval "$(zoxide init zsh)"' >> "$ZSHRC"
 fi
 

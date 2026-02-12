@@ -6,6 +6,7 @@ Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxi
 
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
+| `install` | Comma-separated list of tools to install (e.g. `"bat,ripgrep,fzf"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
 | `bat` | Install bat (cat replacement with syntax highlighting) | boolean | `true` |
 | `ripgrep` | Install ripgrep (fast grep replacement) | boolean | `true` |
 | `fd` | Install fd (fast find replacement) | boolean | `true` |
@@ -32,6 +33,18 @@ Add this feature to your `devcontainer.json`:
 {
   "features": {
     "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {}
+  }
+}
+```
+
+### Install only specific tools
+
+```jsonc
+{
+  "features": {
+    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {
+      "install": "bat,ripgrep,fd,fzf,eza,lazygit"
+    }
   }
 }
 ```

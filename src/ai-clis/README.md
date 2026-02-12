@@ -6,7 +6,7 @@ Installs AI coding assistant CLIs and agentic development tools: Claude Code, Ge
 
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
-| `installMode` | `"all"` installs every CLI unless explicitly disabled; `"selected"` installs only CLIs explicitly set to true | string | `all` |
+| `install` | Comma-separated list of CLIs to install (e.g. `"claudeCode,geminiCli"`). When set, only the listed CLIs are installed. When empty, all CLIs are installed. | string | `""` |
 | `claudeCode` | Install Claude Code CLI | boolean | `true` |
 | `geminiCli` | Install Google Gemini CLI | boolean | `true` |
 | `codex` | Install OpenAI Codex CLI | boolean | `true` |
@@ -32,7 +32,7 @@ Add this feature to your `devcontainer.json`:
 
 ### Install everything except a few
 
-With the default `installMode: "all"`, disable specific CLIs:
+Disable specific CLIs with individual boolean options:
 
 ```jsonc
 {
@@ -47,15 +47,13 @@ With the default `installMode: "all"`, disable specific CLIs:
 
 ### Install only the CLIs you want
 
-Set `installMode` to `"selected"` and enable just what you need — new CLIs added in future releases won't be installed unless you opt in:
+Use `install` to list exactly the CLIs you need — new CLIs added in future releases won't be installed unless you opt in:
 
 ```jsonc
 {
   "features": {
     "ghcr.io/get2knowio/devcontainer-features/ai-clis:1": {
-      "installMode": "selected",
-      "claudeCode": true,
-      "geminiCli": true
+      "install": "claudeCode,geminiCli"
     }
   }
 }

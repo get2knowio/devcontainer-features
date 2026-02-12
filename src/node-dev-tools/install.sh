@@ -3,32 +3,55 @@ set -e
 
 echo "Installing Node.js development tools..."
 
+# If 'install' is set, only install the listed tool groups (comma-separated).
+# Otherwise install everything unless individually disabled.
+if [ -n "${INSTALL}" ]; then
+    TYPESCRIPT="false"
+    BUNDLERS="false"
+    LINTERS="false"
+    WATCHERS="false"
+    BUN="false"
+
+    IFS=',' read -ra SELECTED <<< "${INSTALL}"
+    for item in "${SELECTED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            typescript) TYPESCRIPT="true" ;;
+            bundlers)   BUNDLERS="true" ;;
+            linters)    LINTERS="true" ;;
+            watchers)   WATCHERS="true" ;;
+            bun)        BUN="true" ;;
+            *) echo "Warning: unknown tool group '$item' in install list" ;;
+        esac
+    done
+fi
+
 # TypeScript toolchain
-if [ "${TYPESCRIPT}" = "true" ]; then
+if [ "${TYPESCRIPT}" != "false" ]; then
     echo "Installing TypeScript toolchain..."
     npm install -g typescript ts-node tsx @types/node
 fi
 
 # Bundlers
-if [ "${BUNDLERS}" = "true" ]; then
+if [ "${BUNDLERS}" != "false" ]; then
     echo "Installing bundlers..."
     npm install -g vite esbuild
 fi
 
 # Linters and formatters
-if [ "${LINTERS}" = "true" ]; then
+if [ "${LINTERS}" != "false" ]; then
     echo "Installing linters and formatters..."
     npm install -g prettier eslint @biomejs/biome
 fi
 
 # File watchers
-if [ "${WATCHERS}" = "true" ]; then
+if [ "${WATCHERS}" != "false" ]; then
     echo "Installing file watchers..."
     npm install -g nodemon tsc-watch concurrently
 fi
 
 # Bun runtime
-if [ "${BUN}" = "true" ]; then
+if [ "${BUN}" != "false" ]; then
     echo "Installing Bun..."
     su - "$_REMOTE_USER" -c 'curl -fsSL https://bun.sh/install | bash'
     # Create system-wide symlinks
@@ -53,7 +76,7 @@ alias format="npm run format"
 if command -v npm >/dev/null 2>&1; then eval "$(npm completion zsh)"; fi
 ALIASES
 
-if [ "${BUN}" = "true" ]; then
+if [ "${BUN}" != "false" ]; then
     echo 'export PATH="$HOME/.bun/bin:$PATH"' >> "$ZSHRC"
 fi
 
