@@ -4,12 +4,7 @@
         "features": {
             "ghcr.io/devcontainers/features/node:1": {},
             "ai-clis": {
-                "claudeCode": true,
-                "geminiCli": false,
-                "codex": false,
-                "copilot": false,
-                "openCode": false,
-                "codeRabbit": false
+                "install": "claudeCode"
             }
         }
     },
@@ -18,12 +13,7 @@
         "features": {
             "ghcr.io/devcontainers/features/node:1": {},
             "ai-clis": {
-                "claudeCode": false,
-                "geminiCli": true,
-                "codex": true,
-                "copilot": true,
-                "openCode": true,
-                "codeRabbit": false
+                "install": "geminiCli,codex,copilot,openCode"
             }
         }
     }

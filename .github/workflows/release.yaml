@@ -13,6 +13,43 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump versions for changed features
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          for feature_json in src/*/devcontainer-feature.json; do
+            feature_dir=$(dirname "$feature_json")
+            feature_name=$(basename "$feature_dir")
+
+            # Check if this feature has changes since last release
+            if [ -z "$LAST_TAG" ] || [ -n "$(git diff "$LAST_TAG" -- "$feature_dir")" ]; then
+              current=$(jq -r .version "$feature_json")
+              major=$(echo "$current" | cut -d. -f1)
+              minor=$(echo "$current" | cut -d. -f2)
+              patch=$(echo "$current" | cut -d. -f3)
+              new="$major.$minor.$((patch + 1))"
+              jq --arg v "$new" '.version = $v' "$feature_json" > tmp.json && mv tmp.json "$feature_json"
+              echo "Bumped $feature_name: $current -> $new"
+            else
+              echo "Skipped $feature_name (no changes)"
+            fi
+          done
+
+      - name: Commit version bumps
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/*/devcontainer-feature.json
+          git diff --cached --quiet || git commit -m "chore: auto-bump feature versions for release"
+          git push
+
+      - name: Tag release
+        run: |
+          TAG="release-$(date +%Y%m%d-%H%M%S)"
+          git tag "$TAG"
+          git push origin "$TAG"
 
       - name: Publish features
         uses: devcontainers/action@v1

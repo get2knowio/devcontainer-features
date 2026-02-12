@@ -3,17 +3,7 @@
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
         "features": {
             "modern-cli-tools": {
-                "bat": true,
-                "ripgrep": true,
-                "fd": false,
-                "fzf": false,
-                "eza": false,
-                "zoxide": false,
-                "neovim": false,
-                "tmux": false,
-                "lazygit": false,
-                "astGrep": false,
-                "zellij": false
+                "install": "bat,ripgrep"
             }
         }
     },
