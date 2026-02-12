@@ -12,5 +12,6 @@ check "neovim installed" bash -c "command -v nvim"
 check "tmux installed" bash -c "command -v tmux"
 check "lazygit installed" bash -c "command -v lazygit"
 check "ast-grep installed" bash -c "command -v sg"
+check "jujutsu installed" bash -c "command -v jj"
 
 reportResults

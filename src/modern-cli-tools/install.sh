@@ -84,6 +84,21 @@ if [ "${ASTGREP}" = "true" ]; then
     rm -rf /tmp/ast-grep.zip /tmp/ast-grep
 fi
 
+# jujutsu (jj) - next-gen Git-compatible VCS
+if [ "${JUJUTSU}" = "true" ]; then
+    echo "Installing jujutsu ${JUJUTSUVERSION}..."
+    case "$ARCH" in
+        amd64) JJ_ARCH="x86_64" ;;
+        arm64) JJ_ARCH="aarch64" ;;
+        *) echo "Unsupported architecture for jujutsu: $ARCH" && exit 1 ;;
+    esac
+    JJ_URL="https://github.com/jj-vcs/jj/releases/download/v${JUJUTSUVERSION}/jj-v${JUJUTSUVERSION}-${JJ_ARCH}-unknown-linux-musl.tar.gz"
+    curl -fsSL "$JJ_URL" -o /tmp/jj.tgz
+    tar -xzf /tmp/jj.tgz -C /tmp
+    install /tmp/jj /usr/local/bin/jj
+    rm -f /tmp/jj.tgz /tmp/jj
+fi
+
 # zellij (optional, default false)
 if [ "${ZELLIJ}" = "true" ]; then
     echo "Installing zellij ${ZELLIJVERSION}..."

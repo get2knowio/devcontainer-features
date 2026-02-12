@@ -6,12 +6,12 @@ A collection of **Dev Container Features** published as OCI artifacts to `ghcr.i
 
 | Feature | Description |
 |---------|-------------|
-| [`ai-clis`](src/ai-clis/) | AI coding assistant CLIs (Claude Code, Gemini, Codex, Copilot, OpenCode, CodeRabbit) |
-| [`modern-cli-tools`](src/modern-cli-tools/) | Modern CLI replacements (bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep) |
+| [`ai-clis`](src/ai-clis/) | AI coding assistant CLIs (Claude Code, Gemini, Codex, Copilot, OpenCode, CodeRabbit, Beads, Specify CLI) |
+| [`modern-cli-tools`](src/modern-cli-tools/) | Modern CLI replacements (bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu) |
 | [`node-dev-tools`](src/node-dev-tools/) | Node.js toolchain (TypeScript, bundlers, linters, watchers, Bun) |
 | [`rust-dev-tools`](src/rust-dev-tools/) | Rust development tools (bacon, cargo-edit, cargo-audit) |
 | [`github-actions-tools`](src/github-actions-tools/) | GitHub Actions local dev tools (act, actionlint) |
-| [`python-tools`](src/python-tools/) | Python development tools (Poetry, Specify CLI) |
+| [`python-tools`](src/python-tools/) | Python development tools (Poetry) |
 
 ---
 
@@ -41,6 +41,8 @@ Add any feature to your `.devcontainer/devcontainer.json`:
 | `copilot` | boolean | `true` | Install GitHub Copilot CLI |
 | `openCode` | boolean | `true` | Install OpenCode AI CLI |
 | `codeRabbit` | boolean | `true` | Install CodeRabbit CLI |
+| `beads` | boolean | `true` | Install Beads (coding agent memory system) |
+| `specifyCli` | boolean | `true` | Install Specify CLI (spec-driven development toolkit) |
 
 ### modern-cli-tools
 
@@ -56,9 +58,11 @@ Add any feature to your `.devcontainer/devcontainer.json`:
 | `tmux` | boolean | `true` | tmux (terminal multiplexer) |
 | `lazygit` | boolean | `true` | lazygit (Git TUI) |
 | `astGrep` | boolean | `true` | ast-grep (structural search tool) |
+| `jujutsu` | boolean | `true` | jujutsu (jj, next-gen Git-compatible VCS) |
 | `zellij` | boolean | `false` | zellij (terminal workspace) |
 | `lazygitVersion` | string | `0.59.0` | Version of lazygit |
 | `astGrepVersion` | string | `0.40.5` | Version of ast-grep |
+| `jujutsuVersion` | string | `0.38.0` | Version of jujutsu |
 | `zellijVersion` | string | `0.43.1` | Version of zellij |
 
 ### node-dev-tools
@@ -93,7 +97,6 @@ Add any feature to your `.devcontainer/devcontainer.json`:
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `poetry` | boolean | `true` | Poetry package manager |
-| `specifyCli` | boolean | `true` | Specify CLI (spec-kit) via uv |
 | `poetryVersion` | string | `2.3.2` | Version of Poetry |
 | `inProjectVenvs` | boolean | `true` | Configure Poetry for in-project virtualenvs |
 

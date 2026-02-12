@@ -79,6 +79,18 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/^src/modern-cli-tools/devcontainer-feature\\.json$/"
+      ],
+      "matchStrings": [
+        "\"jujutsuVersion\":\\s*\\{[^}]*\"default\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "depNameTemplate": "jj-vcs/jj",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/^src/python-tools/devcontainer-feature\\.json$/"
       ],
       "matchStrings": [

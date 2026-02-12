@@ -4,8 +4,7 @@
         "features": {
             "ghcr.io/devcontainers/features/python:1": {},
             "python-tools": {
-                "poetry": true,
-                "specifyCli": false
+                "poetry": true
             }
         }
     }

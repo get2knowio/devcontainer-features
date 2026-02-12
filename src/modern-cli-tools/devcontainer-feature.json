@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "name": "Modern CLI Tools",
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/modern-cli-tools",
-    "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, and optionally zellij.",
+    "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and optionally zellij.",
     "options": {
         "bat": {
             "type": "boolean",
@@ -55,10 +55,20 @@
             "default": true,
             "description": "Install ast-grep (structural search tool)"
         },
+        "jujutsu": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install jujutsu (jj, next-gen Git-compatible VCS)"
+        },
         "zellij": {
             "type": "boolean",
             "default": false,
             "description": "Install zellij (terminal workspace)"
+        },
+        "jujutsuVersion": {
+            "type": "string",
+            "default": "0.38.0",
+            "description": "Version of jujutsu to install"
         },
         "ezaVersion": {
             "type": "string",

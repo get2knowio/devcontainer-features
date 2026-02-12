@@ -39,4 +39,26 @@ if [ "${CODERABBIT}" = "true" ]; then
     curl -fsSL https://cli.coderabbit.ai/install.sh | sh
 fi
 
+# Beads - coding agent memory system
+if [ "${BEADS}" = "true" ]; then
+    echo "Installing Beads..."
+    npm install -g @beads/bd
+fi
+
+# Specify CLI - spec-driven development toolkit
+if [ "${SPECIFYCLI}" = "true" ]; then
+    echo "Installing Specify CLI (spec-kit) via uv..."
+    # Ensure uv is available
+    if command -v uv >/dev/null 2>&1; then
+        UV_BIN="$(command -v uv)"
+    else
+        echo "uv not found; installing via Astral script..."
+        su - "$_REMOTE_USER" -c 'curl -Ls https://astral.sh/uv/install.sh | sh'
+        UV_BIN="$_REMOTE_USER_HOME/.local/bin/uv"
+    fi
+    # Ensure ~/.local/bin on PATH
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$_REMOTE_USER_HOME/.zshrc"
+    su - "$_REMOTE_USER" -c "\"$UV_BIN\" tool install specify-cli --from git+https://github.com/github/spec-kit.git" || echo "Warning: Specify CLI installation failed"
+fi
+
 echo "AI CLI tools installation complete."
