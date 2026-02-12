@@ -2,7 +2,7 @@
     "id": "python-tools",
     "version": "1.0.0",
     "name": "Python Development Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/python-tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/python-tools",
     "description": "Installs Python development tools: Poetry (dependency management) and Specify CLI (spec-kit).",
     "options": {
         "poetry": {

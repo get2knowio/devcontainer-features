@@ -1,6 +1,6 @@
 # get2know.io DevContainer Feature Collection
 
-A collection of **Dev Container Features** published as OCI artifacts to `ghcr.io/get2knowio/devcontainer`. Pick individual feature bundles or compose them all for a full-stack environment.
+A collection of **Dev Container Features** published as OCI artifacts to `ghcr.io/get2knowio/devcontainer-features`. Pick individual feature bundles or compose them all for a full-stack environment.
 
 ## Features
 
@@ -23,8 +23,8 @@ Add any feature to your `.devcontainer/devcontainer.json`:
 {
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "ghcr.io/get2knowio/devcontainer/modern-cli-tools:1": {},
-    "ghcr.io/get2knowio/devcontainer/github-actions-tools:1": {}
+    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {},
+    "ghcr.io/get2knowio/devcontainer-features/github-actions-tools:1": {}
   }
 }
 ```

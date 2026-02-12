@@ -16,12 +16,12 @@
         "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
         "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {},
         "ghcr.io/devcontainers-extra/features/starship:1": {},
-        "ghcr.io/get2knowio/devcontainer/ai-clis:1": {},
-        "ghcr.io/get2knowio/devcontainer/modern-cli-tools:1": {},
-        "ghcr.io/get2knowio/devcontainer/node-dev-tools:1": {},
-        "ghcr.io/get2knowio/devcontainer/rust-dev-tools:1": {},
-        "ghcr.io/get2knowio/devcontainer/github-actions-tools:1": {},
-        "ghcr.io/get2knowio/devcontainer/python-tools:1": {}
+        "ghcr.io/get2knowio/devcontainer-features/ai-clis:1": {},
+        "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {},
+        "ghcr.io/get2knowio/devcontainer-features/node-dev-tools:1": {},
+        "ghcr.io/get2knowio/devcontainer-features/rust-dev-tools:1": {},
+        "ghcr.io/get2knowio/devcontainer-features/github-actions-tools:1": {},
+        "ghcr.io/get2knowio/devcontainer-features/python-tools:1": {}
     },
     "customizations": {
         "vscode": {

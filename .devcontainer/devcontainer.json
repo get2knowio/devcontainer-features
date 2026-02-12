@@ -22,6 +22,7 @@
     },
     "mounts": [
         "source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached",
-        "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached"
+        "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+	"source=${localEnv:HOME}/projects/devcontainer-templates,target=/workspaces/devcontainer-templates,type=bind,consistency=cached"
     ]
 }

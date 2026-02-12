@@ -2,7 +2,7 @@
     "id": "github-actions-tools",
     "version": "1.0.0",
     "name": "GitHub Actions Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/github-actions-tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/github-actions-tools",
     "description": "Installs tools for local GitHub Actions development: act (local runner) and actionlint (workflow linter).",
     "options": {
         "act": {

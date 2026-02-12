@@ -2,7 +2,7 @@
     "id": "node-dev-tools",
     "version": "1.0.0",
     "name": "Node.js Development Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/node-dev-tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/node-dev-tools",
     "description": "Installs TypeScript toolchain, bundlers, linters, file watchers, and Bun runtime for Node.js development.",
     "options": {
         "typescript": {

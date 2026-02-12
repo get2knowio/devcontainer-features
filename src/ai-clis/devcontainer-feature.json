@@ -2,7 +2,7 @@
     "id": "ai-clis",
     "version": "1.0.0",
     "name": "AI CLI Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer/tree/main/src/ai-clis",
+    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
     "description": "Installs popular AI coding assistant CLIs: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, and CodeRabbit.",
     "options": {
         "claudeCode": {
