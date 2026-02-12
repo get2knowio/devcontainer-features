@@ -1,6 +1,6 @@
 {
     "id": "modern-cli-tools",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "name": "Modern CLI Tools",
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/modern-cli-tools",
     "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and optionally zellij.",
