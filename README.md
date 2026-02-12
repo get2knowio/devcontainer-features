@@ -11,7 +11,7 @@ A collection of **Dev Container Features** published as OCI artifacts to `ghcr.i
 | [`node-dev-tools`](src/node-dev-tools/) | Node.js toolchain (TypeScript, bundlers, linters, watchers, Bun) |
 | [`rust-dev-tools`](src/rust-dev-tools/) | Rust development tools (bacon, cargo-edit, cargo-audit) |
 | [`github-actions-tools`](src/github-actions-tools/) | GitHub Actions local dev tools (act, actionlint) |
-| [`python-tools`](src/python-tools/) | Python development tools (Poetry) |
+| [`python-tools`](src/python-tools/) | Python development tools (uv, Poetry, ruff, mypy) |
 
 ---
 
@@ -96,7 +96,10 @@ Add any feature to your `.devcontainer/devcontainer.json`:
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
+| `uv` | boolean | `true` | uv (fast Python package manager) |
 | `poetry` | boolean | `true` | Poetry package manager |
+| `ruff` | boolean | `true` | ruff (fast Python linter and formatter) |
+| `mypy` | boolean | `true` | mypy (static type checker) |
 | `poetryVersion` | string | `2.3.2` | Version of Poetry |
 | `inProjectVenvs` | boolean | `true` | Configure Poetry for in-project virtualenvs |
 
