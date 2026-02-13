@@ -1,47 +1,47 @@
 {
-    "id": "python-tools",
-    "version": "1.1.1",
-    "name": "Python Development Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/python-tools",
-    "description": "Installs Python development tools: uv, Poetry, ruff, and mypy.",
-    "options": {
-        "install": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of tools to install (e.g. 'uv,ruff'). When set, only the listed tools are installed. When empty (default), all tools are installed."
-        },
-        "uv": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install uv (fast Python package manager)"
-        },
-        "poetry": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install Poetry package manager"
-        },
-        "ruff": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install ruff (fast Python linter and formatter)"
-        },
-        "mypy": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install mypy (static type checker)"
-        },
-        "poetryVersion": {
-            "type": "string",
-            "default": "2.3.2",
-            "description": "Version of Poetry to install"
-        },
-        "inProjectVenvs": {
-            "type": "boolean",
-            "default": true,
-            "description": "Configure Poetry to create virtualenvs in project directory"
-        }
+  "id": "python-tools",
+  "version": "1.1.2",
+  "name": "Python Development Tools",
+  "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/python-tools",
+  "description": "Installs Python development tools: uv, Poetry, ruff, and mypy.",
+  "options": {
+    "install": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of tools to install (e.g. 'uv,ruff'). When set, only the listed tools are installed. When empty (default), all tools are installed."
     },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/python"
-    ]
+    "uv": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install uv (fast Python package manager)"
+    },
+    "poetry": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install Poetry package manager"
+    },
+    "ruff": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install ruff (fast Python linter and formatter)"
+    },
+    "mypy": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install mypy (static type checker)"
+    },
+    "poetryVersion": {
+      "type": "string",
+      "default": "2.3.2",
+      "description": "Version of Poetry to install"
+    },
+    "inProjectVenvs": {
+      "type": "boolean",
+      "default": true,
+      "description": "Configure Poetry to create virtualenvs in project directory"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/python"
+  ]
 }

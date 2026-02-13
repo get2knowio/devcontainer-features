@@ -1,57 +1,57 @@
 {
-    "id": "ai-clis",
-    "version": "1.1.1",
-    "name": "AI CLI Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
-    "description": "Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads, and Specify CLI.",
-    "options": {
-        "install": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of CLIs to install (e.g. 'claudeCode,geminiCli'). When set, only the listed CLIs are installed. When empty (default), all CLIs are installed."
-        },
-        "claudeCode": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install Claude Code CLI"
-        },
-        "geminiCli": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install Google Gemini CLI"
-        },
-        "codex": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install OpenAI Codex CLI"
-        },
-        "copilot": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install GitHub Copilot CLI"
-        },
-        "openCode": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install OpenCode AI CLI"
-        },
-        "codeRabbit": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install CodeRabbit CLI"
-        },
-        "beads": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install Beads (coding agent memory system)"
-        },
-        "specifyCli": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install Specify CLI (spec-driven development toolkit)"
-        }
+  "id": "ai-clis",
+  "version": "1.1.2",
+  "name": "AI CLI Tools",
+  "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
+  "description": "Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads, and Specify CLI.",
+  "options": {
+    "install": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of CLIs to install (e.g. 'claudeCode,geminiCli'). When set, only the listed CLIs are installed. When empty (default), all CLIs are installed."
     },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/node"
-    ]
+    "claudeCode": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install Claude Code CLI"
+    },
+    "geminiCli": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install Google Gemini CLI"
+    },
+    "codex": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install OpenAI Codex CLI"
+    },
+    "copilot": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install GitHub Copilot CLI"
+    },
+    "openCode": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install OpenCode AI CLI"
+    },
+    "codeRabbit": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install CodeRabbit CLI"
+    },
+    "beads": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install Beads (coding agent memory system)"
+    },
+    "specifyCli": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install Specify CLI (spec-driven development toolkit)"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/node"
+  ]
 }
