@@ -17,13 +17,17 @@ if ! command -v cargo >/dev/null 2>&1; then
     exit 1
 fi
 
-# If rustup is present but cargo doesn't actually work, install a default toolchain
+# If rustup is present, unconditionally ensure a default toolchain is installed.
+# The rust:latest devcontainer image ships rustup shims without a default toolchain,
+# causing "rustup could not choose a version of cargo" errors.
 if command -v rustup >/dev/null 2>&1; then
-    if ! cargo --version >/dev/null 2>&1; then
-        echo "No working Rust toolchain found. Installing stable..."
-        rustup default stable
-    fi
+    echo "Ensuring stable Rust toolchain is available..."
+    rustup default stable 2>&1 || true
 fi
+
+# Capture the cargo bin directory for use in su - commands
+# (su - resets PATH, losing Docker ENV vars like /usr/local/cargo/bin)
+CARGO_BIN_DIR="$(dirname "$(command -v cargo)")"
 
 # Step 1: All tools enabled by default
 BACON="true"
@@ -62,10 +66,12 @@ if [ -n "${OMIT}" ]; then
     done
 fi
 
-# Helper: source cargo env before running cargo as the remote user
-# su - resets PATH, so the user's login shell may not have /usr/local/cargo/bin
+# Helper: run cargo as the remote user with the correct environment.
+# su - resets environment (losing Docker ENV vars), so we explicitly pass them.
+RUSTUP_HOME="${RUSTUP_HOME:-/usr/local/rustup}"
+CARGO_HOME="${CARGO_HOME:-/usr/local/cargo}"
 cargo_as_user() {
-    su - "$_REMOTE_USER" -c ". /usr/local/cargo/env 2>/dev/null || true; cargo $*"
+    su - "$_REMOTE_USER" -c "export PATH=\"$CARGO_BIN_DIR:\$PATH\" RUSTUP_HOME=\"$RUSTUP_HOME\" CARGO_HOME=\"$CARGO_HOME\"; cargo $*"
 }
 
 # bacon (replaces archived cargo-watch)
