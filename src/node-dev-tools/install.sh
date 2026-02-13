@@ -3,8 +3,14 @@ set -e
 
 echo "Installing Node.js development tools..."
 
-# If 'install' is set, only install the listed tool groups (comma-separated).
-# Otherwise install everything unless individually disabled.
+# Step 1: All tools enabled by default
+TYPESCRIPT="true"
+BUNDLERS="true"
+LINTERS="true"
+WATCHERS="true"
+BUN="true"
+
+# Step 2: If install is set, whitelist mode
 if [ -n "${INSTALL}" ]; then
     TYPESCRIPT="false"
     BUNDLERS="false"
@@ -26,32 +32,48 @@ if [ -n "${INSTALL}" ]; then
     done
 fi
 
+# Step 3: If omit is set, blacklist filter
+if [ -n "${OMIT}" ]; then
+    IFS=',' read -ra EXCLUDED <<< "${OMIT}"
+    for item in "${EXCLUDED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            typescript) TYPESCRIPT="false" ;;
+            bundlers)   BUNDLERS="false" ;;
+            linters)    LINTERS="false" ;;
+            watchers)   WATCHERS="false" ;;
+            bun)        BUN="false" ;;
+            *) echo "Warning: unknown tool group '$item' in omit list" ;;
+        esac
+    done
+fi
+
 # TypeScript toolchain
-if [ "${TYPESCRIPT}" != "false" ]; then
+if [ "${TYPESCRIPT}" = "true" ]; then
     echo "Installing TypeScript toolchain..."
     npm install -g typescript ts-node tsx @types/node
 fi
 
 # Bundlers
-if [ "${BUNDLERS}" != "false" ]; then
+if [ "${BUNDLERS}" = "true" ]; then
     echo "Installing bundlers..."
     npm install -g vite esbuild
 fi
 
 # Linters and formatters
-if [ "${LINTERS}" != "false" ]; then
+if [ "${LINTERS}" = "true" ]; then
     echo "Installing linters and formatters..."
     npm install -g prettier eslint @biomejs/biome
 fi
 
 # File watchers
-if [ "${WATCHERS}" != "false" ]; then
+if [ "${WATCHERS}" = "true" ]; then
     echo "Installing file watchers..."
     npm install -g nodemon tsc-watch concurrently
 fi
 
 # Bun runtime
-if [ "${BUN}" != "false" ]; then
+if [ "${BUN}" = "true" ]; then
     echo "Installing Bun..."
     su - "$_REMOTE_USER" -c 'curl -fsSL https://bun.sh/install | bash'
     # Create system-wide symlinks
@@ -76,7 +98,7 @@ alias format="npm run format"
 if command -v npm >/dev/null 2>&1; then eval "$(npm completion zsh)"; fi
 ALIASES
 
-if [ "${BUN}" != "false" ]; then
+if [ "${BUN}" = "true" ]; then
     echo 'export PATH="$HOME/.bun/bin:$PATH"' >> "$ZSHRC"
 fi
 

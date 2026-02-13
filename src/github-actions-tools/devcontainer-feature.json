@@ -1,6 +1,6 @@
 {
     "id": "github-actions-tools",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "name": "GitHub Actions Tools",
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/github-actions-tools",
     "description": "Installs tools for local GitHub Actions development: act (local runner) and actionlint (workflow linter).",
@@ -10,15 +10,10 @@
             "default": "",
             "description": "Comma-separated list of tools to install (e.g. 'act'). When set, only the listed tools are installed. When empty (default), all tools are installed."
         },
-        "act": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install act (run GitHub Actions locally)"
-        },
-        "actionlint": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install actionlint (GitHub Actions workflow linter)"
+        "omit": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of tools to exclude (e.g. 'actionlint'). When set, the listed tools are skipped. Applied after 'install' filtering."
         },
         "actVersion": {
             "type": "string",

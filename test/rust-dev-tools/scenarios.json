@@ -4,9 +4,7 @@
         "features": {
             "ghcr.io/devcontainers/features/rust:1": {},
             "rust-dev-tools": {
-                "bacon": true,
-                "cargoEdit": false,
-                "cargoAudit": false
+                "install": "bacon"
             }
         }
     }

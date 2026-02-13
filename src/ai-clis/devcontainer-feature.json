@@ -1,57 +1,22 @@
 {
-  "id": "ai-clis",
-  "version": "1.1.2",
-  "name": "AI CLI Tools",
-  "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
-  "description": "Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads, and Specify CLI.",
-  "options": {
-    "install": {
-      "type": "string",
-      "default": "",
-      "description": "Comma-separated list of CLIs to install (e.g. 'claudeCode,geminiCli'). When set, only the listed CLIs are installed. When empty (default), all CLIs are installed."
+    "id": "ai-clis",
+    "version": "2.0.0",
+    "name": "AI CLI Tools",
+    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
+    "description": "Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads, and Specify CLI.",
+    "options": {
+        "install": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of CLIs to install (e.g. 'claudeCode,geminiCli'). When set, only the listed CLIs are installed. When empty (default), all CLIs are installed."
+        },
+        "omit": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of CLIs to exclude (e.g. 'codex,copilot'). When set, the listed CLIs are skipped. Applied after 'install' filtering."
+        }
     },
-    "claudeCode": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install Claude Code CLI"
-    },
-    "geminiCli": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install Google Gemini CLI"
-    },
-    "codex": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install OpenAI Codex CLI"
-    },
-    "copilot": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install GitHub Copilot CLI"
-    },
-    "openCode": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install OpenCode AI CLI"
-    },
-    "codeRabbit": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install CodeRabbit CLI"
-    },
-    "beads": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install Beads (coding agent memory system)"
-    },
-    "specifyCli": {
-      "type": "boolean",
-      "default": true,
-      "description": "Install Specify CLI (spec-driven development toolkit)"
-    }
-  },
-  "installsAfter": [
-    "ghcr.io/devcontainers/features/node"
-  ]
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/node"
+    ]
 }

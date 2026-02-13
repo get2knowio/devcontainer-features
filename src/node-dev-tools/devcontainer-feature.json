@@ -1,6 +1,6 @@
 {
     "id": "node-dev-tools",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "name": "Node.js Development Tools",
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/node-dev-tools",
     "description": "Installs TypeScript toolchain, bundlers, linters, file watchers, and Bun runtime for Node.js development.",
@@ -10,30 +10,10 @@
             "default": "",
             "description": "Comma-separated list of tool groups to install (e.g. 'typescript,bun'). When set, only the listed groups are installed. When empty (default), all groups are installed."
         },
-        "typescript": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install TypeScript, ts-node, tsx, and @types/node"
-        },
-        "bundlers": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install vite and esbuild"
-        },
-        "linters": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install prettier, eslint, and biome"
-        },
-        "watchers": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install nodemon, tsc-watch, and concurrently"
-        },
-        "bun": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install Bun JavaScript runtime"
+        "omit": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of tool groups to exclude (e.g. 'bun'). When set, the listed groups are skipped. Applied after 'install' filtering."
         }
     },
     "installsAfter": [

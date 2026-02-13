@@ -13,5 +13,6 @@ check "tmux installed" bash -c "command -v tmux"
 check "lazygit installed" bash -c "command -v lazygit"
 check "ast-grep installed" bash -c "command -v sg"
 check "jujutsu installed" bash -c "command -v jj"
+check "zellij installed" bash -c "command -v zellij"
 
 reportResults

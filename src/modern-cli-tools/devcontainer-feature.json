@@ -1,74 +1,19 @@
 {
     "id": "modern-cli-tools",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "name": "Modern CLI Tools",
     "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/modern-cli-tools",
-    "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and optionally zellij.",
+    "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and zellij.",
     "options": {
         "install": {
             "type": "string",
             "default": "",
             "description": "Comma-separated list of tools to install (e.g. 'bat,ripgrep,fzf'). When set, only the listed tools are installed. When empty (default), all tools are installed."
         },
-        "bat": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install bat (cat replacement with syntax highlighting)"
-        },
-        "ripgrep": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install ripgrep (fast grep replacement)"
-        },
-        "fd": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install fd (fast find replacement)"
-        },
-        "fzf": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install fzf (fuzzy finder)"
-        },
-        "eza": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install eza (modern ls replacement)"
-        },
-        "zoxide": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install zoxide (smart cd replacement)"
-        },
-        "neovim": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install neovim"
-        },
-        "tmux": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install tmux (terminal multiplexer)"
-        },
-        "lazygit": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install lazygit (Git TUI)"
-        },
-        "astGrep": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install ast-grep (structural search tool)"
-        },
-        "jujutsu": {
-            "type": "boolean",
-            "default": true,
-            "description": "Install jujutsu (jj, next-gen Git-compatible VCS)"
-        },
-        "zellij": {
-            "type": "boolean",
-            "default": false,
-            "description": "Install zellij (terminal workspace)"
+        "omit": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of tools to exclude (e.g. 'neovim,tmux'). When set, the listed tools are skipped. Applied after 'install' filtering."
         },
         "jujutsuVersion": {
             "type": "string",

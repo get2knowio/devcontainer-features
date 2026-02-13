@@ -3,8 +3,17 @@ set -e
 
 echo "Installing AI CLI tools..."
 
-# If 'install' is set, only install the listed CLIs (comma-separated).
-# Otherwise install everything unless individually disabled.
+# Step 1: All tools enabled by default
+CLAUDECODE="true"
+GEMINICLI="true"
+CODEX="true"
+COPILOT="true"
+OPENCODE="true"
+CODERABBIT="true"
+BEADS="true"
+SPECIFYCLI="true"
+
+# Step 2: If install is set, whitelist mode
 if [ -n "${INSTALL}" ]; then
     CLAUDECODE="false"
     GEMINICLI="false"
@@ -32,50 +41,69 @@ if [ -n "${INSTALL}" ]; then
     done
 fi
 
+# Step 3: If omit is set, blacklist filter
+if [ -n "${OMIT}" ]; then
+    IFS=',' read -ra EXCLUDED <<< "${OMIT}"
+    for item in "${EXCLUDED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            claudeCode)  CLAUDECODE="false" ;;
+            geminiCli)   GEMINICLI="false" ;;
+            codex)       CODEX="false" ;;
+            copilot)     COPILOT="false" ;;
+            openCode)    OPENCODE="false" ;;
+            codeRabbit)  CODERABBIT="false" ;;
+            beads)       BEADS="false" ;;
+            specifyCli)  SPECIFYCLI="false" ;;
+            *) echo "Warning: unknown CLI '$item' in omit list" ;;
+        esac
+    done
+fi
+
 # Claude Code - uses its own installer (npm install -g is deprecated)
-if [ "${CLAUDECODE}" != "false" ]; then
+if [ "${CLAUDECODE}" = "true" ]; then
     echo "Installing Claude Code..."
     su - "$_REMOTE_USER" -c 'curl -fsSL https://claude.ai/install.sh | bash' || echo "Warning: Claude Code installation failed"
 fi
 
 # Gemini CLI
-if [ "${GEMINICLI}" != "false" ]; then
+if [ "${GEMINICLI}" = "true" ]; then
     echo "Installing Gemini CLI..."
     npm install -g @google/gemini-cli
 fi
 
 # OpenAI Codex
-if [ "${CODEX}" != "false" ]; then
+if [ "${CODEX}" = "true" ]; then
     echo "Installing OpenAI Codex..."
     npm install -g @openai/codex
 fi
 
 # GitHub Copilot CLI (requires Node 22+)
-if [ "${COPILOT}" != "false" ]; then
+if [ "${COPILOT}" = "true" ]; then
     echo "Installing GitHub Copilot CLI..."
     npm install -g @github/copilot
 fi
 
 # OpenCode AI
-if [ "${OPENCODE}" != "false" ]; then
+if [ "${OPENCODE}" = "true" ]; then
     echo "Installing OpenCode AI..."
     npm install -g opencode-ai
 fi
 
 # CodeRabbit CLI
-if [ "${CODERABBIT}" != "false" ]; then
+if [ "${CODERABBIT}" = "true" ]; then
     echo "Installing CodeRabbit CLI..."
     curl -fsSL https://cli.coderabbit.ai/install.sh | sh
 fi
 
 # Beads - coding agent memory system
-if [ "${BEADS}" != "false" ]; then
+if [ "${BEADS}" = "true" ]; then
     echo "Installing Beads..."
     npm install -g @beads/bd
 fi
 
 # Specify CLI - spec-driven development toolkit
-if [ "${SPECIFYCLI}" != "false" ]; then
+if [ "${SPECIFYCLI}" = "true" ]; then
     echo "Installing Specify CLI (spec-kit) via uv..."
     # Ensure uv is available
     if command -v uv >/dev/null 2>&1; then

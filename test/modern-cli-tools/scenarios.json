@@ -7,11 +7,11 @@
             }
         }
     },
-    "with_zellij": {
+    "omit_neovim": {
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
         "features": {
             "modern-cli-tools": {
-                "zellij": true
+                "omit": "neovim"
             }
         }
     }

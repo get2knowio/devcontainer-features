@@ -3,8 +3,13 @@ set -e
 
 echo "Installing Python development tools..."
 
-# If 'install' is set, only install the listed tools (comma-separated).
-# Otherwise install everything unless individually disabled.
+# Step 1: All tools enabled by default
+UV="true"
+POETRY="true"
+RUFF="true"
+MYPY="true"
+
+# Step 2: If install is set, whitelist mode
 if [ -n "${INSTALL}" ]; then
     UV="false"
     POETRY="false"
@@ -24,8 +29,23 @@ if [ -n "${INSTALL}" ]; then
     done
 fi
 
+# Step 3: If omit is set, blacklist filter
+if [ -n "${OMIT}" ]; then
+    IFS=',' read -ra EXCLUDED <<< "${OMIT}"
+    for item in "${EXCLUDED[@]}"; do
+        item="$(echo "$item" | xargs)"
+        case "$item" in
+            uv)     UV="false" ;;
+            poetry) POETRY="false" ;;
+            ruff)   RUFF="false" ;;
+            mypy)   MYPY="false" ;;
+            *) echo "Warning: unknown tool '$item' in omit list" ;;
+        esac
+    done
+fi
+
 # uv - fast Python package manager
-if [ "${UV}" != "false" ]; then
+if [ "${UV}" = "true" ]; then
     echo "Installing uv..."
     curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
     # Copy to system-wide location (symlinks fail because /root is not accessible to non-root users)
@@ -35,7 +55,7 @@ if [ "${UV}" != "false" ]; then
 fi
 
 # Poetry
-if [ "${POETRY}" != "false" ]; then
+if [ "${POETRY}" = "true" ]; then
     echo "Installing Poetry ${POETRYVERSION}..."
     export POETRY_HOME=/opt/poetry
     curl -sSL https://install.python-poetry.org | python3 - --version "${POETRYVERSION}"
@@ -56,13 +76,13 @@ else
 fi
 
 # ruff - fast Python linter and formatter
-if [ "${RUFF}" != "false" ]; then
+if [ "${RUFF}" = "true" ]; then
     echo "Installing ruff..."
     $PY_INSTALL ruff
 fi
 
 # mypy - static type checker
-if [ "${MYPY}" != "false" ]; then
+if [ "${MYPY}" = "true" ]; then
     echo "Installing mypy..."
     $PY_INSTALL mypy
 fi
