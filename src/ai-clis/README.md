@@ -7,16 +7,9 @@ Installs AI coding assistant CLIs and agentic development tools: Claude Code, Ge
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
 | `install` | Comma-separated list of CLIs to install (e.g. `"claudeCode,geminiCli"`). When set, only the listed CLIs are installed. When empty, all CLIs are installed. | string | `""` |
-| `claudeCode` | Install Claude Code CLI | boolean | `true` |
-| `geminiCli` | Install Google Gemini CLI | boolean | `true` |
-| `codex` | Install OpenAI Codex CLI | boolean | `true` |
-| `copilot` | Install GitHub Copilot CLI | boolean | `true` |
-| `openCode` | Install OpenCode AI CLI | boolean | `true` |
-| `codeRabbit` | Install CodeRabbit CLI | boolean | `true` |
-| `beads` | Install Beads (coding agent memory system) | boolean | `true` |
-| `specifyCli` | Install Specify CLI (spec-driven development toolkit) | boolean | `true` |
+| `omit` | Comma-separated list of CLIs to exclude (e.g. `"codex,copilot"`). When set, the listed CLIs are skipped. Applied after `install` filtering. | string | `""` |
 
-> These tools can be large — disable any you don't need to speed up container builds.
+> These tools can be large — use `install` or `omit` to skip any you don't need and speed up container builds.
 
 ## Usage
 
@@ -25,21 +18,20 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/ai-clis:1": {}
+    "ghcr.io/get2knowio/devcontainer-features/ai-clis:2": {}
   }
 }
 ```
 
 ### Install everything except a few
 
-Disable specific CLIs with individual boolean options:
+Use `omit` to exclude specific CLIs:
 
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/ai-clis:1": {
-      "codex": false,
-      "copilot": false
+    "ghcr.io/get2knowio/devcontainer-features/ai-clis:2": {
+      "omit": "codex,copilot"
     }
   }
 }
@@ -52,7 +44,7 @@ Use `install` to list exactly the CLIs you need — new CLIs added in future rel
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/ai-clis:1": {
+    "ghcr.io/get2knowio/devcontainer-features/ai-clis:2": {
       "install": "claudeCode,geminiCli"
     }
   }

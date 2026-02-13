@@ -7,11 +7,7 @@ Installs TypeScript toolchain, bundlers, linters, file watchers, and Bun runtime
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
 | `install` | Comma-separated list of tool groups to install (e.g. `"typescript,bun"`). When set, only the listed groups are installed. When empty, all groups are installed. | string | `""` |
-| `typescript` | Install TypeScript, ts-node, tsx, and @types/node | boolean | `true` |
-| `bundlers` | Install vite and esbuild | boolean | `true` |
-| `linters` | Install prettier, eslint, and biome | boolean | `true` |
-| `watchers` | Install nodemon, tsc-watch, and concurrently | boolean | `true` |
-| `bun` | Install Bun JavaScript runtime | boolean | `true` |
+| `omit` | Comma-separated list of tool groups to exclude (e.g. `"bun"`). When set, the listed groups are skipped. Applied after `install` filtering. | string | `""` |
 
 ## Usage
 
@@ -20,7 +16,7 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/node-dev-tools:1": {}
+    "ghcr.io/get2knowio/devcontainer-features/node-dev-tools:2": {}
   }
 }
 ```
@@ -30,7 +26,7 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/node-dev-tools:1": {
+    "ghcr.io/get2knowio/devcontainer-features/node-dev-tools:2": {
       "install": "typescript,bun"
     }
   }

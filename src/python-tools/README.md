@@ -7,10 +7,7 @@ Installs Python development tools: uv, Poetry, ruff, and mypy.
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
 | `install` | Comma-separated list of tools to install (e.g. `"uv,ruff"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
-| `uv` | Install uv (fast Python package manager) | boolean | `true` |
-| `poetry` | Install Poetry package manager | boolean | `true` |
-| `ruff` | Install ruff (fast Python linter and formatter) | boolean | `true` |
-| `mypy` | Install mypy (static type checker) | boolean | `true` |
+| `omit` | Comma-separated list of tools to exclude (e.g. `"mypy"`). When set, the listed tools are skipped. Applied after `install` filtering. | string | `""` |
 | `poetryVersion` | Version of Poetry to install | string | `2.3.2` |
 | `inProjectVenvs` | Configure Poetry to create virtualenvs in project directory | boolean | `true` |
 
@@ -21,7 +18,7 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/python-tools:1": {}
+    "ghcr.io/get2knowio/devcontainer-features/python-tools:2": {}
   }
 }
 ```
@@ -31,7 +28,7 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/python-tools:1": {
+    "ghcr.io/get2knowio/devcontainer-features/python-tools:2": {
       "install": "uv,ruff"
     }
   }

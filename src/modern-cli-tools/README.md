@@ -1,24 +1,13 @@
 # Modern CLI Tools (modern-cli-tools)
 
-Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and optionally zellij.
+Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and zellij.
 
 ## Options
 
 | Option | Description | Type | Default |
 |--------|-------------|------|---------|
 | `install` | Comma-separated list of tools to install (e.g. `"bat,ripgrep,fzf"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
-| `bat` | Install bat (cat replacement with syntax highlighting) | boolean | `true` |
-| `ripgrep` | Install ripgrep (fast grep replacement) | boolean | `true` |
-| `fd` | Install fd (fast find replacement) | boolean | `true` |
-| `fzf` | Install fzf (fuzzy finder) | boolean | `true` |
-| `eza` | Install eza (modern ls replacement) | boolean | `true` |
-| `zoxide` | Install zoxide (smart cd replacement) | boolean | `true` |
-| `neovim` | Install neovim | boolean | `true` |
-| `tmux` | Install tmux (terminal multiplexer) | boolean | `true` |
-| `lazygit` | Install lazygit (Git TUI) | boolean | `true` |
-| `astGrep` | Install ast-grep (structural search tool) | boolean | `true` |
-| `jujutsu` | Install jujutsu (jj, next-gen Git-compatible VCS) | boolean | `true` |
-| `zellij` | Install zellij (terminal workspace) | boolean | `false` |
+| `omit` | Comma-separated list of tools to exclude (e.g. `"neovim,tmux"`). When set, the listed tools are skipped. Applied after `install` filtering. | string | `""` |
 | `jujutsuVersion` | Version of jujutsu to install | string | `0.38.0` |
 | `ezaVersion` | Version of eza to install | string | `latest` |
 | `lazygitVersion` | Version of lazygit to install | string | `0.59.0` |
@@ -32,7 +21,7 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {}
+    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:2": {}
   }
 }
 ```
@@ -42,20 +31,20 @@ Add this feature to your `devcontainer.json`:
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {
+    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:2": {
       "install": "bat,ripgrep,fd,fzf,eza,lazygit"
     }
   }
 }
 ```
 
-### Enable zellij and pin lazygit version
+### Exclude zellij and pin lazygit version
 
 ```jsonc
 {
   "features": {
-    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:1": {
-      "zellij": true,
+    "ghcr.io/get2knowio/devcontainer-features/modern-cli-tools:2": {
+      "omit": "zellij",
       "lazygitVersion": "0.58.0"
     }
   }
