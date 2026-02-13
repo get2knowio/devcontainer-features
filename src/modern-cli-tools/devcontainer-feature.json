@@ -1,44 +1,44 @@
 {
-    "id": "modern-cli-tools",
-    "version": "2.0.0",
-    "name": "Modern CLI Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/modern-cli-tools",
-    "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and zellij.",
-    "options": {
-        "install": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of tools to install (e.g. 'bat,ripgrep,fzf'). When set, only the listed tools are installed. When empty (default), all tools are installed."
-        },
-        "omit": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of tools to exclude (e.g. 'neovim,tmux'). When set, the listed tools are skipped. Applied after 'install' filtering."
-        },
-        "jujutsuVersion": {
-            "type": "string",
-            "default": "0.38.0",
-            "description": "Version of jujutsu to install"
-        },
-        "ezaVersion": {
-            "type": "string",
-            "default": "latest",
-            "description": "Version of eza to install"
-        },
-        "lazygitVersion": {
-            "type": "string",
-            "default": "0.59.0",
-            "description": "Version of lazygit to install"
-        },
-        "astGrepVersion": {
-            "type": "string",
-            "default": "0.40.5",
-            "description": "Version of ast-grep to install"
-        },
-        "zellijVersion": {
-            "type": "string",
-            "default": "0.43.1",
-            "description": "Version of zellij to install"
-        }
+  "id": "modern-cli-tools",
+  "version": "2.0.1",
+  "name": "Modern CLI Tools",
+  "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/modern-cli-tools",
+  "description": "Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and zellij.",
+  "options": {
+    "install": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of tools to install (e.g. 'bat,ripgrep,fzf'). When set, only the listed tools are installed. When empty (default), all tools are installed."
+    },
+    "omit": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of tools to exclude (e.g. 'neovim,tmux'). When set, the listed tools are skipped. Applied after 'install' filtering."
+    },
+    "jujutsuVersion": {
+      "type": "string",
+      "default": "0.38.0",
+      "description": "Version of jujutsu to install"
+    },
+    "ezaVersion": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of eza to install"
+    },
+    "lazygitVersion": {
+      "type": "string",
+      "default": "0.59.0",
+      "description": "Version of lazygit to install"
+    },
+    "astGrepVersion": {
+      "type": "string",
+      "default": "0.40.5",
+      "description": "Version of ast-grep to install"
+    },
+    "zellijVersion": {
+      "type": "string",
+      "default": "0.43.1",
+      "description": "Version of zellij to install"
     }
+  }
 }

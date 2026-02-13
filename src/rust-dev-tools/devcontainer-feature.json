@@ -1,22 +1,22 @@
 {
-    "id": "rust-dev-tools",
-    "version": "2.0.0",
-    "name": "Rust Development Tools",
-    "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/rust-dev-tools",
-    "description": "Installs Rust development tools: bacon (build watcher), cargo-edit, and cargo-audit.",
-    "options": {
-        "install": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of tools to install (e.g. 'bacon,cargoEdit'). When set, only the listed tools are installed. When empty (default), all tools are installed."
-        },
-        "omit": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of tools to exclude (e.g. 'cargoAudit'). When set, the listed tools are skipped. Applied after 'install' filtering."
-        }
+  "id": "rust-dev-tools",
+  "version": "2.0.1",
+  "name": "Rust Development Tools",
+  "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/rust-dev-tools",
+  "description": "Installs Rust development tools: bacon (build watcher), cargo-edit, and cargo-audit.",
+  "options": {
+    "install": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of tools to install (e.g. 'bacon,cargoEdit'). When set, only the listed tools are installed. When empty (default), all tools are installed."
     },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/rust"
-    ]
+    "omit": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of tools to exclude (e.g. 'cargoAudit'). When set, the listed tools are skipped. Applied after 'install' filtering."
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/rust"
+  ]
 }
