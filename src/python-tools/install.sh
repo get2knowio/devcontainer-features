@@ -28,9 +28,10 @@ fi
 if [ "${UV}" != "false" ]; then
     echo "Installing uv..."
     curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
-    # Make available system-wide
-    ln -sf /root/.local/bin/uv /usr/local/bin/uv
-    ln -sf /root/.local/bin/uvx /usr/local/bin/uvx
+    # Copy to system-wide location (symlinks fail because /root is not accessible to non-root users)
+    cp /root/.local/bin/uv /usr/local/bin/uv
+    cp /root/.local/bin/uvx /usr/local/bin/uvx
+    chmod 755 /usr/local/bin/uv /usr/local/bin/uvx
 fi
 
 # Poetry
@@ -48,7 +49,8 @@ fi
 
 # Prefer uv for installing Python tools; fall back to pip
 if command -v uv >/dev/null 2>&1; then
-    PY_INSTALL="uv tool install"
+    # Use UV_TOOL_BIN_DIR so tool binaries go to a world-accessible location
+    PY_INSTALL="env UV_TOOL_BIN_DIR=/usr/local/bin uv tool install"
 else
     PY_INSTALL="pip install --break-system-packages"
 fi

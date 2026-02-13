@@ -85,8 +85,9 @@ if [ "${SPECIFYCLI}" != "false" ]; then
     else
         echo "uv not found; installing via Astral script..."
         curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
-        ln -sf /root/.local/bin/uv /usr/local/bin/uv
-        ln -sf /root/.local/bin/uvx /usr/local/bin/uvx
+        cp /root/.local/bin/uv /usr/local/bin/uv
+        cp /root/.local/bin/uvx /usr/local/bin/uvx
+        chmod 755 /usr/local/bin/uv /usr/local/bin/uvx
         UV_BIN="/usr/local/bin/uv"
     fi
     # Ensure ~/.local/bin on PATH for user-installed tools
