@@ -17,10 +17,10 @@ if ! command -v cargo >/dev/null 2>&1; then
     exit 1
 fi
 
-# If rustup is present, ensure a default toolchain is set
+# If rustup is present but cargo doesn't actually work, install a default toolchain
 if command -v rustup >/dev/null 2>&1; then
-    if ! rustup show active-toolchain >/dev/null 2>&1; then
-        echo "No default Rust toolchain configured. Installing stable..."
+    if ! cargo --version >/dev/null 2>&1; then
+        echo "No working Rust toolchain found. Installing stable..."
         rustup default stable
     fi
 fi
@@ -62,22 +62,28 @@ if [ -n "${OMIT}" ]; then
     done
 fi
 
+# Helper: source cargo env before running cargo as the remote user
+# su - resets PATH, so the user's login shell may not have /usr/local/cargo/bin
+cargo_as_user() {
+    su - "$_REMOTE_USER" -c ". /usr/local/cargo/env 2>/dev/null || true; cargo $*"
+}
+
 # bacon (replaces archived cargo-watch)
 if [ "${BACON}" = "true" ]; then
     echo "Installing bacon..."
-    su - "$_REMOTE_USER" -c 'cargo install bacon' || echo "Warning: bacon installation failed"
+    cargo_as_user install bacon || echo "Warning: bacon installation failed"
 fi
 
 # cargo-edit
 if [ "${CARGOEDIT}" = "true" ]; then
     echo "Installing cargo-edit..."
-    su - "$_REMOTE_USER" -c 'cargo install cargo-edit' || echo "Warning: cargo-edit installation failed"
+    cargo_as_user install cargo-edit || echo "Warning: cargo-edit installation failed"
 fi
 
 # cargo-audit
 if [ "${CARGOAUDIT}" = "true" ]; then
     echo "Installing cargo-audit..."
-    su - "$_REMOTE_USER" -c 'cargo install cargo-audit' || echo "Warning: cargo-audit installation failed"
+    cargo_as_user install cargo-audit || echo "Warning: cargo-audit installation failed"
 fi
 
 # --- Shell configuration ---
