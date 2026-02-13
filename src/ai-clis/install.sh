@@ -93,7 +93,7 @@ fi
 # CodeRabbit CLI
 if [ "${CODERABBIT}" = "true" ]; then
     echo "Installing CodeRabbit CLI..."
-    curl -fsSL https://cli.coderabbit.ai/install.sh | sh
+    curl -fsSL https://cli.coderabbit.ai/install.sh | CODERABBIT_INSTALL_DIR=/usr/local/bin sh
 fi
 
 # Beads - coding agent memory system
