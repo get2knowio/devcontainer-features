@@ -3,10 +3,26 @@ set -e
 
 echo "Installing Rust development tools..."
 
+# Try to source cargo environment from common locations
+for cargo_env in "/usr/local/cargo/env" "$_REMOTE_USER_HOME/.cargo/env" "$HOME/.cargo/env"; do
+    if [ -f "$cargo_env" ]; then
+        . "$cargo_env"
+        break
+    fi
+done
+
 # Ensure cargo is available
 if ! command -v cargo >/dev/null 2>&1; then
     echo "Error: cargo not found. Install the Rust feature first."
     exit 1
+fi
+
+# If rustup is present, ensure a default toolchain is set
+if command -v rustup >/dev/null 2>&1; then
+    if ! rustup show active-toolchain >/dev/null 2>&1; then
+        echo "No default Rust toolchain configured. Installing stable..."
+        rustup default stable
+    fi
 fi
 
 # Step 1: All tools enabled by default

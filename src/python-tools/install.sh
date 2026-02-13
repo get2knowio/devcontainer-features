@@ -69,8 +69,8 @@ fi
 
 # Prefer uv for installing Python tools; fall back to pip
 if command -v uv >/dev/null 2>&1; then
-    # Use UV_TOOL_BIN_DIR so tool binaries go to a world-accessible location
-    PY_INSTALL="env UV_TOOL_BIN_DIR=/usr/local/bin uv tool install"
+    # Use UV_TOOL_DIR + UV_TOOL_BIN_DIR so tool venvs and binaries are world-accessible
+    PY_INSTALL="env UV_TOOL_DIR=/opt/uv-tools UV_TOOL_BIN_DIR=/usr/local/bin uv tool install"
 else
     PY_INSTALL="pip install --break-system-packages"
 fi
