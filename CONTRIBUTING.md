@@ -32,7 +32,7 @@ examples/
 3. Create test files under `test/<feature-name>/`
 4. Add the feature to `test/_global/scenarios.json` and `all_features.sh`
 5. Update `examples/full-stack.devcontainer.json`
-6. If the feature has versioned tools, add Renovate custom managers to `renovate.json`
+6. If the feature has versioned tools, use `resolve_latest_version` in the install script and default to `"latest"`
 
 ## Feature Development Guidelines
 
@@ -80,7 +80,7 @@ Runs on PRs that modify `devcontainer-feature.json` files.
 
 ## Renovate
 
-Custom regex managers in `renovate.json` track version defaults in feature JSON files. When updating a tool version default, Renovate will automatically detect it and open PRs.
+Renovate tracks GitHub Actions versions in CI workflows. Tool versions default to `"latest"` and resolve at container build time, so no custom managers are needed. Pin specific versions via feature options if needed.
 
 ## License
 

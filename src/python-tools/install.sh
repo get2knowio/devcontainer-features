@@ -56,9 +56,14 @@ fi
 
 # Poetry
 if [ "${POETRY}" = "true" ]; then
-    echo "Installing Poetry ${POETRYVERSION}..."
     export POETRY_HOME=/opt/poetry
-    curl -sSL https://install.python-poetry.org | python3 - --version "${POETRYVERSION}"
+    if [ "${POETRYVERSION}" = "latest" ]; then
+        echo "Installing Poetry (latest)..."
+        curl -sSL https://install.python-poetry.org | python3 -
+    else
+        echo "Installing Poetry ${POETRYVERSION}..."
+        curl -sSL https://install.python-poetry.org | python3 - --version "${POETRYVERSION}"
+    fi
     ln -sf "${POETRY_HOME}/bin/poetry" /usr/local/bin/poetry
 
     # Configure in-project virtualenvs

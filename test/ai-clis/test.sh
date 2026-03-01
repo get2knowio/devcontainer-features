@@ -8,6 +8,7 @@ check "codex installed" bash -c "command -v codex"
 check "copilot installed" bash -c "command -v copilot"
 check "opencode installed" bash -c "command -v opencode"
 check "coderabbit installed" bash -c "command -v coderabbit"
+check "dolt installed" bash -c "command -v dolt"
 check "beads installed" bash -c "command -v bd"
 check "specify installed" bash -c "command -v specify"
 

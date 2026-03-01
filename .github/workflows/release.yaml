@@ -1,6 +1,10 @@
 name: "Release Dev Container Features"
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
   workflow_dispatch:
 
 permissions:
@@ -10,7 +14,7 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore: auto-bump feature versions')
     steps:
       - uses: actions/checkout@v4
         with:

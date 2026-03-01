@@ -5,6 +5,14 @@ echo "Installing modern CLI tools..."
 
 ARCH=$(dpkg --print-architecture)
 
+resolve_latest_version() {
+    local repo="$1"
+    local tag
+    tag=$(curl -sI "https://github.com/${repo}/releases/latest" \
+          | grep -i "^location:" | sed 's/.*\///' | tr -d '\r\n')
+    echo "${tag#v}"
+}
+
 # Step 1: All tools enabled by default
 BAT="true"
 RIPGREP="true"
@@ -128,6 +136,10 @@ fi
 
 # lazygit
 if [ "${LAZYGIT}" = "true" ]; then
+    if [ "${LAZYGITVERSION}" = "latest" ]; then
+        LAZYGITVERSION=$(resolve_latest_version "jesseduffield/lazygit")
+        echo "Resolved lazygit latest -> ${LAZYGITVERSION}"
+    fi
     echo "Installing lazygit ${LAZYGITVERSION}..."
     case "$ARCH" in
         amd64) LG_ARCH="x86_64" ;;
@@ -143,6 +155,10 @@ fi
 
 # ast-grep
 if [ "${ASTGREP}" = "true" ]; then
+    if [ "${ASTGREPVERSION}" = "latest" ]; then
+        ASTGREPVERSION=$(resolve_latest_version "ast-grep/ast-grep")
+        echo "Resolved ast-grep latest -> ${ASTGREPVERSION}"
+    fi
     echo "Installing ast-grep ${ASTGREPVERSION}..."
     case "$ARCH" in
         amd64) SG_ARCH="x86_64" ;;
@@ -159,6 +175,10 @@ fi
 
 # jujutsu (jj) - next-gen Git-compatible VCS
 if [ "${JUJUTSU}" = "true" ]; then
+    if [ "${JUJUTSUVERSION}" = "latest" ]; then
+        JUJUTSUVERSION=$(resolve_latest_version "jj-vcs/jj")
+        echo "Resolved jujutsu latest -> ${JUJUTSUVERSION}"
+    fi
     echo "Installing jujutsu ${JUJUTSUVERSION}..."
     case "$ARCH" in
         amd64) JJ_ARCH="x86_64" ;;
@@ -174,6 +194,10 @@ fi
 
 # zellij
 if [ "${ZELLIJ}" = "true" ]; then
+    if [ "${ZELLIJVERSION}" = "latest" ]; then
+        ZELLIJVERSION=$(resolve_latest_version "zellij-org/zellij")
+        echo "Resolved zellij latest -> ${ZELLIJVERSION}"
+    fi
     echo "Installing zellij ${ZELLIJVERSION}..."
     case "$ARCH" in
         amd64) ZELLIJ_ARCH="x86_64" ;;

@@ -17,13 +17,13 @@
     },
     "actVersion": {
       "type": "string",
-      "default": "0.2.84",
-      "description": "Version of act to install"
+      "default": "latest",
+      "description": "Version of act to install, or 'latest'"
     },
     "actionlintVersion": {
       "type": "string",
-      "default": "1.7.10",
-      "description": "Version of actionlint to install"
+      "default": "latest",
+      "description": "Version of actionlint to install, or 'latest'"
     }
   }
 }

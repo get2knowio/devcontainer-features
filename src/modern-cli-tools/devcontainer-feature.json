@@ -17,28 +17,28 @@
     },
     "jujutsuVersion": {
       "type": "string",
-      "default": "0.38.0",
-      "description": "Version of jujutsu to install"
+      "default": "latest",
+      "description": "Version of jujutsu to install, or 'latest'"
     },
     "ezaVersion": {
       "type": "string",
       "default": "latest",
-      "description": "Version of eza to install"
+      "description": "Version of eza to install, or 'latest'"
     },
     "lazygitVersion": {
       "type": "string",
-      "default": "0.59.0",
-      "description": "Version of lazygit to install"
+      "default": "latest",
+      "description": "Version of lazygit to install, or 'latest'"
     },
     "astGrepVersion": {
       "type": "string",
-      "default": "0.40.5",
-      "description": "Version of ast-grep to install"
+      "default": "latest",
+      "description": "Version of ast-grep to install, or 'latest'"
     },
     "zellijVersion": {
       "type": "string",
-      "default": "0.43.1",
-      "description": "Version of zellij to install"
+      "default": "latest",
+      "description": "Version of zellij to install, or 'latest'"
     }
   }
 }

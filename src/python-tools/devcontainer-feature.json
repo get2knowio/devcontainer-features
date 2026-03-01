@@ -17,8 +17,8 @@
     },
     "poetryVersion": {
       "type": "string",
-      "default": "2.3.2",
-      "description": "Version of Poetry to install"
+      "default": "latest",
+      "description": "Version of Poetry to install, or 'latest'"
     },
     "inProjectVenvs": {
       "type": "boolean",

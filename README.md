@@ -6,7 +6,7 @@ A collection of **Dev Container Features** published as OCI artifacts to `ghcr.i
 
 | Feature | Description |
 |---------|-------------|
-| [`ai-clis`](src/ai-clis/) | AI coding assistant CLIs (Claude Code, Gemini, Codex, Copilot, OpenCode, CodeRabbit, Beads, Specify CLI) |
+| [`ai-clis`](src/ai-clis/) | AI coding assistant CLIs (Claude Code, Gemini, Codex, Copilot, OpenCode, CodeRabbit, Beads + Dolt, Specify CLI) |
 | [`modern-cli-tools`](src/modern-cli-tools/) | Modern CLI replacements (bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, zellij) |
 | [`node-dev-tools`](src/node-dev-tools/) | Node.js toolchain (TypeScript, bundlers, linters, watchers, Bun) |
 | [`rust-dev-tools`](src/rust-dev-tools/) | Rust development tools (bacon, cargo-edit, cargo-audit) |
@@ -48,11 +48,11 @@ Tools: `bat`, `ripgrep`, `fd`, `fzf`, `eza`, `zoxide`, `neovim`, `tmux`, `lazygi
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `lazygitVersion` | string | `0.59.0` | Version of lazygit |
-| `astGrepVersion` | string | `0.40.5` | Version of ast-grep |
-| `jujutsuVersion` | string | `0.38.0` | Version of jujutsu |
-| `ezaVersion` | string | `latest` | Version of eza |
-| `zellijVersion` | string | `0.43.1` | Version of zellij |
+| `lazygitVersion` | string | `latest` | Version of lazygit, or 'latest' |
+| `astGrepVersion` | string | `latest` | Version of ast-grep, or 'latest' |
+| `jujutsuVersion` | string | `latest` | Version of jujutsu, or 'latest' |
+| `ezaVersion` | string | `latest` | Version of eza, or 'latest' |
+| `zellijVersion` | string | `latest` | Version of zellij, or 'latest' |
 
 ### node-dev-tools
 
@@ -68,8 +68,8 @@ Tools: `act`, `actionlint`
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `actVersion` | string | `0.2.84` | Version of act |
-| `actionlintVersion` | string | `1.7.10` | Version of actionlint |
+| `actVersion` | string | `latest` | Version of act, or 'latest' |
+| `actionlintVersion` | string | `latest` | Version of actionlint, or 'latest' |
 
 ### python-tools
 
@@ -77,7 +77,7 @@ Tools: `uv`, `poetry`, `ruff`, `mypy`
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `poetryVersion` | string | `2.3.2` | Version of Poetry |
+| `poetryVersion` | string | `latest` | Version of Poetry, or 'latest' |
 | `inProjectVenvs` | boolean | `true` | Configure Poetry for in-project virtualenvs |
 
 ---
@@ -96,7 +96,7 @@ Features that install shell aliases append them to `$_REMOTE_USER_HOME/.zshrc`:
 
 ## Automated Dependency Updates
 
-[Renovate](https://docs.renovatebot.com) tracks version defaults in `devcontainer-feature.json` files via custom regex managers. Updates run weekly before 06:00 UTC on Mondays. Patch updates automerge; major/minor require review.
+Renovate tracks GitHub Actions versions in CI workflows. Tool versions resolve to latest at container build time; pin specific versions via feature options if needed.
 
 ## Contributing
 

@@ -5,6 +5,14 @@ echo "Installing GitHub Actions tools..."
 
 ARCH=$(dpkg --print-architecture)
 
+resolve_latest_version() {
+    local repo="$1"
+    local tag
+    tag=$(curl -sI "https://github.com/${repo}/releases/latest" \
+          | grep -i "^location:" | sed 's/.*\///' | tr -d '\r\n')
+    echo "${tag#v}"
+}
+
 # Step 1: All tools enabled by default
 ACT="true"
 ACTIONLINT="true"
@@ -40,6 +48,10 @@ fi
 
 # act - run GitHub Actions locally
 if [ "${ACT}" = "true" ]; then
+    if [ "${ACTVERSION}" = "latest" ]; then
+        ACTVERSION=$(resolve_latest_version "nektos/act")
+        echo "Resolved act latest -> ${ACTVERSION}"
+    fi
     echo "Installing act ${ACTVERSION}..."
     case "$ARCH" in
         amd64) ACT_ARCH="x86_64" ;;
@@ -53,6 +65,10 @@ fi
 
 # actionlint - GitHub Actions workflow linter
 if [ "${ACTIONLINT}" = "true" ]; then
+    if [ "${ACTIONLINTVERSION}" = "latest" ]; then
+        ACTIONLINTVERSION=$(resolve_latest_version "rhysd/actionlint")
+        echo "Resolved actionlint latest -> ${ACTIONLINTVERSION}"
+    fi
     echo "Installing actionlint ${ACTIONLINTVERSION}..."
     case "$ARCH" in
         amd64) ACTIONLINT_ARCH="amd64" ;;

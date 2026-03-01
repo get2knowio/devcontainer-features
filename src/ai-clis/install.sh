@@ -96,8 +96,10 @@ if [ "${CODERABBIT}" = "true" ]; then
     curl -fsSL https://cli.coderabbit.ai/install.sh | CODERABBIT_INSTALL_DIR=/usr/local/bin sh
 fi
 
-# Beads - coding agent memory system
+# Beads - coding agent memory system (depends on Dolt)
 if [ "${BEADS}" = "true" ]; then
+    echo "Installing Dolt (required by Beads)..."
+    curl -fsSL https://github.com/dolthub/dolt/releases/latest/download/install.sh | bash
     echo "Installing Beads..."
     npm install -g @beads/bd
 fi
