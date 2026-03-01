@@ -14,7 +14,7 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore: auto-bump feature versions') }}
+    if: github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
     steps:
       - uses: actions/checkout@v4
         with:
