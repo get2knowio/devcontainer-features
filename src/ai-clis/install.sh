@@ -5,6 +5,7 @@ echo "Installing AI CLI tools..."
 
 # Step 1: All tools enabled by default
 CLAUDECODE="true"
+CLAUDEAGENTACP="true"
 GEMINICLI="true"
 CODEX="true"
 COPILOT="true"
@@ -16,6 +17,7 @@ SPECIFYCLI="true"
 # Step 2: If install is set, whitelist mode
 if [ -n "${INSTALL}" ]; then
     CLAUDECODE="false"
+    CLAUDEAGENTACP="false"
     GEMINICLI="false"
     CODEX="false"
     COPILOT="false"
@@ -28,14 +30,15 @@ if [ -n "${INSTALL}" ]; then
     for item in "${SELECTED[@]}"; do
         item="$(echo "$item" | xargs)"
         case "$item" in
-            claudeCode)  CLAUDECODE="true" ;;
-            geminiCli)   GEMINICLI="true" ;;
-            codex)       CODEX="true" ;;
-            copilot)     COPILOT="true" ;;
-            openCode)    OPENCODE="true" ;;
-            codeRabbit)  CODERABBIT="true" ;;
-            beads)       BEADS="true" ;;
-            specifyCli)  SPECIFYCLI="true" ;;
+            claudeCode)      CLAUDECODE="true" ;;
+            claudeAgentAcp)  CLAUDEAGENTACP="true" ;;
+            geminiCli)       GEMINICLI="true" ;;
+            codex)           CODEX="true" ;;
+            copilot)         COPILOT="true" ;;
+            openCode)        OPENCODE="true" ;;
+            codeRabbit)      CODERABBIT="true" ;;
+            beads)           BEADS="true" ;;
+            specifyCli)      SPECIFYCLI="true" ;;
             *) echo "Warning: unknown CLI '$item' in install list" ;;
         esac
     done
@@ -47,14 +50,15 @@ if [ -n "${OMIT}" ]; then
     for item in "${EXCLUDED[@]}"; do
         item="$(echo "$item" | xargs)"
         case "$item" in
-            claudeCode)  CLAUDECODE="false" ;;
-            geminiCli)   GEMINICLI="false" ;;
-            codex)       CODEX="false" ;;
-            copilot)     COPILOT="false" ;;
-            openCode)    OPENCODE="false" ;;
-            codeRabbit)  CODERABBIT="false" ;;
-            beads)       BEADS="false" ;;
-            specifyCli)  SPECIFYCLI="false" ;;
+            claudeCode)      CLAUDECODE="false" ;;
+            claudeAgentAcp)  CLAUDEAGENTACP="false" ;;
+            geminiCli)       GEMINICLI="false" ;;
+            codex)           CODEX="false" ;;
+            copilot)         COPILOT="false" ;;
+            openCode)        OPENCODE="false" ;;
+            codeRabbit)      CODERABBIT="false" ;;
+            beads)           BEADS="false" ;;
+            specifyCli)      SPECIFYCLI="false" ;;
             *) echo "Warning: unknown CLI '$item' in omit list" ;;
         esac
     done
@@ -64,6 +68,12 @@ fi
 if [ "${CLAUDECODE}" = "true" ]; then
     echo "Installing Claude Code..."
     su - "$_REMOTE_USER" -c 'curl -fsSL https://claude.ai/install.sh | bash' || echo "Warning: Claude Code installation failed"
+fi
+
+# Claude Agent ACP - ACP server for Claude agent SDK
+if [ "${CLAUDEAGENTACP}" = "true" ]; then
+    echo "Installing Claude Agent ACP..."
+    npm install -g @zed-industries/claude-agent-acp
 fi
 
 # Gemini CLI
