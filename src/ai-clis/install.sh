@@ -97,7 +97,7 @@ fi
 # OpenCode AI
 if [ "${OPENCODE}" = "true" ]; then
     echo "Installing OpenCode AI..."
-    curl -fsSL https://opencode.ai/install | bash
+    npm install -g opencode-ai
 fi
 
 # CodeRabbit CLI
