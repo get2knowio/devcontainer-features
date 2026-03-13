@@ -15,4 +15,5 @@ jobs:
       - name: Validate features
         uses: devcontainers/action@v1
         with:
+          base-path-to-features: "./src"
           validate-only: "true"
