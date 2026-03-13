@@ -11,5 +11,7 @@ check "coderabbit installed" bash -c "command -v coderabbit"
 check "dolt installed" bash -c "command -v dolt"
 check "beads installed" bash -c "command -v bd"
 check "specify installed" bash -c "command -v specify"
+check "qmd installed" bash -c "command -v qmd"
+check "claude-agent-acp installed" bash -c "command -v claude-agent-acp"
 
 reportResults

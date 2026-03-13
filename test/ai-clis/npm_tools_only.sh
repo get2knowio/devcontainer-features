@@ -8,5 +8,7 @@ check "copilot installed" bash -c "command -v copilot"
 check "opencode installed" bash -c "command -v opencode"
 check "claude not installed" bash -c "! command -v claude"
 check "coderabbit not installed" bash -c "! command -v coderabbit"
+check "qmd not installed" bash -c "! command -v qmd"
+check "claude-agent-acp not installed" bash -c "! command -v claude-agent-acp"
 
 reportResults

@@ -12,6 +12,8 @@ OPENCODE="true"
 CODERABBIT="true"
 BEADS="true"
 SPECIFYCLI="true"
+QMD="true"
+CLAUDEAGENTACP="true"
 
 # Step 2: If install is set, whitelist mode
 if [ -n "${INSTALL}" ]; then
@@ -23,6 +25,8 @@ if [ -n "${INSTALL}" ]; then
     CODERABBIT="false"
     BEADS="false"
     SPECIFYCLI="false"
+    QMD="false"
+    CLAUDEAGENTACP="false"
 
     IFS=',' read -ra SELECTED <<< "${INSTALL}"
     for item in "${SELECTED[@]}"; do
@@ -36,6 +40,8 @@ if [ -n "${INSTALL}" ]; then
             codeRabbit)  CODERABBIT="true" ;;
             beads)       BEADS="true" ;;
             specifyCli)  SPECIFYCLI="true" ;;
+            qmd)             QMD="true" ;;
+            claudeAgentAcp)  CLAUDEAGENTACP="true" ;;
             *) echo "Warning: unknown CLI '$item' in install list" ;;
         esac
     done
@@ -55,6 +61,8 @@ if [ -n "${OMIT}" ]; then
             codeRabbit)  CODERABBIT="false" ;;
             beads)       BEADS="false" ;;
             specifyCli)  SPECIFYCLI="false" ;;
+            qmd)             QMD="false" ;;
+            claudeAgentAcp)  CLAUDEAGENTACP="false" ;;
             *) echo "Warning: unknown CLI '$item' in omit list" ;;
         esac
     done
@@ -123,6 +131,18 @@ if [ "${SPECIFYCLI}" = "true" ]; then
     # Ensure ~/.local/bin on PATH for user-installed tools
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$_REMOTE_USER_HOME/.zshrc"
     su - "$_REMOTE_USER" -c "\"$UV_BIN\" tool install specify-cli --from git+https://github.com/github/spec-kit.git" || echo "Warning: Specify CLI installation failed"
+fi
+
+# QMD - on-device search engine for markdown notes and documents
+if [ "${QMD}" = "true" ]; then
+    echo "Installing QMD..."
+    npm install -g @tobilu/qmd
+fi
+
+# Claude Agent ACP - ACP adapter for Claude Code SDK (by Zed Industries)
+if [ "${CLAUDEAGENTACP}" = "true" ]; then
+    echo "Installing Claude Agent ACP..."
+    npm install -g @zed-industries/claude-agent-acp
 fi
 
 echo "AI CLI tools installation complete."
