@@ -26,6 +26,7 @@ LAZYGIT="true"
 ASTGREP="true"
 JUJUTSU="true"
 ZELLIJ="true"
+STARSHIP="true"
 
 # Step 2: If install is set, whitelist mode
 if [ -n "${INSTALL}" ]; then
@@ -41,6 +42,7 @@ if [ -n "${INSTALL}" ]; then
     ASTGREP="false"
     JUJUTSU="false"
     ZELLIJ="false"
+    STARSHIP="false"
 
     IFS=',' read -ra SELECTED <<< "${INSTALL}"
     for item in "${SELECTED[@]}"; do
@@ -58,6 +60,7 @@ if [ -n "${INSTALL}" ]; then
             astGrep)  ASTGREP="true" ;;
             jujutsu)  JUJUTSU="true" ;;
             zellij)   ZELLIJ="true" ;;
+            starship) STARSHIP="true" ;;
             *) echo "Warning: unknown tool '$item' in install list" ;;
         esac
     done
@@ -81,6 +84,7 @@ if [ -n "${OMIT}" ]; then
             astGrep)  ASTGREP="false" ;;
             jujutsu)  JUJUTSU="false" ;;
             zellij)   ZELLIJ="false" ;;
+            starship) STARSHIP="false" ;;
             *) echo "Warning: unknown tool '$item' in omit list" ;;
         esac
     done
@@ -210,6 +214,22 @@ if [ "${ZELLIJ}" = "true" ]; then
     rm -f /tmp/zellij.tgz
 fi
 
+# starship
+if [ "${STARSHIP}" = "true" ]; then
+    if [ "${STARSHIPVERSION}" = "latest" ]; then
+        STARSHIPVERSION=$(resolve_latest_version "starship/starship")
+        echo "Resolved starship latest -> ${STARSHIPVERSION}"
+    fi
+    echo "Installing starship ${STARSHIPVERSION}..."
+    case "$ARCH" in
+        amd64) STARSHIP_ARCH="x86_64-unknown-linux-gnu" ;;
+        arm64) STARSHIP_ARCH="aarch64-unknown-linux-musl" ;;  # no gnu build published for arm64
+        *) echo "Unsupported architecture for starship: $ARCH" && exit 1 ;;
+    esac
+    STARSHIP_URL="https://github.com/starship/starship/releases/download/v${STARSHIPVERSION}/starship-${STARSHIP_ARCH}.tar.gz"
+    curl -fsSL "$STARSHIP_URL" | tar -xzf - -C /usr/local/bin starship
+fi
+
 # --- Shell configuration ---
 ZSHRC="$_REMOTE_USER_HOME/.zshrc"
 
@@ -221,6 +241,10 @@ fi
 
 if [ "${ZOXIDE}" = "true" ]; then
     echo 'eval "$(zoxide init zsh)"' >> "$ZSHRC"
+fi
+
+if [ "${STARSHIP}" = "true" ]; then
+    echo 'eval "$(starship init zsh)"' >> "$ZSHRC"
 fi
 
 echo "Modern CLI tools installation complete."

@@ -1,6 +1,6 @@
 # Modern CLI Tools (modern-cli-tools)
 
-Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, and zellij.
+Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxide, neovim, tmux, lazygit, ast-grep, jujutsu, zellij, and starship.
 
 ## Options
 
@@ -13,6 +13,7 @@ Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxi
 | `lazygitVersion` | Version of lazygit to install | string | `0.59.0` |
 | `astGrepVersion` | Version of ast-grep to install | string | `0.40.5` |
 | `zellijVersion` | Version of zellij to install | string | `0.43.1` |
+| `starshipVersion` | Version of starship to install | string | `latest` |
 
 ## Usage
 
