@@ -96,6 +96,8 @@ fi
 if [ "${OPENCODE}" = "true" ]; then
     echo "Installing OpenCode AI..."
     curl -fsSL https://opencode.ai/install | bash
+    # Installer puts binary in $HOME/.opencode/bin — symlink to a system PATH location
+    ln -sf "$HOME/.opencode/bin/opencode" /usr/local/bin/opencode
 fi
 
 # CodeRabbit CLI
