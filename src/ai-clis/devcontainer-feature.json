@@ -1,6 +1,6 @@
 {
   "id": "ai-clis",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "name": "AI CLI Tools",
   "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/ai-clis",
   "description": "Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads (with Dolt), Specify CLI, QMD, and Claude Agent ACP.",
