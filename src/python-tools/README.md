@@ -8,7 +8,7 @@ Installs Python development tools: uv, Poetry, ruff, and mypy.
 |--------|-------------|------|---------|
 | `install` | Comma-separated list of tools to install (e.g. `"uv,ruff"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
 | `omit` | Comma-separated list of tools to exclude (e.g. `"mypy"`). When set, the listed tools are skipped. Applied after `install` filtering. | string | `""` |
-| `poetryVersion` | Version of Poetry to install | string | `2.3.2` |
+| `poetryVersion` | Version of Poetry to install | string | `latest` |
 | `inProjectVenvs` | Configure Poetry to create virtualenvs in project directory | boolean | `true` |
 
 ## Usage

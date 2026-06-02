@@ -1,4 +1,15 @@
 .DS_Store
 .env
+.env*
 .secrets
 test/_output/
+node_modules/
+dist/
+build/
+*.log
+*.tmp
+*.swp
+.vscode/
+.idea/
+__pycache__/
+*.pyc

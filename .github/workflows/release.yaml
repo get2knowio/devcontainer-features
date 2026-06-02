@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "src/**"
+      - ".github/workflows/release.yaml"
   workflow_dispatch:
 
 permissions:
@@ -55,10 +56,29 @@ jobs:
           git tag "$TAG"
           git push origin "$TAG"
 
+      - name: Validate feature metadata before publish
+        uses: devcontainers/action@v1
+        with:
+          validate-only: "true"
+
+      - name: Check agentsh generated docs references
+        run: |
+          AGENTSH_VERSION=$(jq -r .version src/agentsh/devcontainer-feature.json)
+          grep -q "ghcr.io/get2knowio/devcontainer-features/agentsh:${AGENTSH_VERSION}" src/agentsh/README.md
+          grep -q "ghcr.io/get2knowio/devcontainer-features/agentsh" README.md
+
       - name: Publish features
         uses: devcontainers/action@v1
         with:
           publish-features: "true"
           base-path-to-features: "./src"
+          generate-docs: "true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: agentsh publish summary
+        run: |
+          AGENTSH_VERSION=$(jq -r .version src/agentsh/devcontainer-feature.json)
+          echo "Published ghcr.io/get2knowio/devcontainer-features/agentsh:${AGENTSH_VERSION}"
+          echo "Published ghcr.io/get2knowio/devcontainer-features/agentsh:latest"
+          echo "Verify GHCR package visibility is public after publish."

@@ -1,0 +1,71 @@
+{
+  "id": "agentsh",
+  "version": "0.1.0",
+  "name": "agentsh",
+  "documentationURL": "https://github.com/get2knowio/devcontainer-features/tree/main/src/agentsh",
+  "description": "Installs agentsh execution-layer security with bash and sh shell shims, a default policy, a non-overridable security floor, and policy-based approvals served over the agentsh REST API.",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "0.20.2",
+      "description": "Pinned agentsh stable release to install, without the leading v."
+    },
+    "approvalTimeoutSeconds": {
+      "type": "number",
+      "default": 300,
+      "description": "Seconds an approval-required action waits before failing secure (deny)."
+    },
+    "shimForceNonTty": {
+      "type": "boolean",
+      "default": true,
+      "description": "Force shell shim mediation for non-interactive agent subprocesses."
+    },
+    "installShellShims": {
+      "type": "boolean",
+      "default": true,
+      "description": "Replace /bin/sh and /bin/bash with agentsh shell shims so every shell invocation is mediated. Leave true for the secure production default. Set false only for validation/advanced scenarios (for example the Dev Container test harness, which bootstraps containers through /bin/sh); agentsh, policies, config, and the shim binary are still installed when false."
+    },
+    "installDevDependencies": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install curl, certificates, jq, Python, PyYAML, and shell dependencies when missing."
+    },
+    "policyOverlayPath": {
+      "type": "string",
+      "default": ".devcontainer/agentsh-policy.yaml",
+      "description": "Workspace-relative policy overlay path that replaces the default user policy while preserving the security floor."
+    },
+    "externalRestApi": {
+      "type": "boolean",
+      "default": false,
+      "description": "Bind the agentsh REST API on all container interfaces for a sidecar notifier. Requires restApiKey."
+    },
+    "restPort": {
+      "type": "number",
+      "default": 18080,
+      "description": "Port for the agentsh REST API."
+    },
+    "restApiKey": {
+      "type": "string",
+      "default": "",
+      "description": "API key required by external notifier sidecars. Required when externalRestApi is true."
+    }
+  },
+  "containerEnv": {
+    "AGENTSH_SERVER": "http://127.0.0.1:18080",
+    "AGENTSH_SHIM_FORCE": "1"
+  },
+  "capAdd": [
+    "SYS_PTRACE"
+  ],
+  "securityOpt": [
+    "seccomp=unconfined"
+  ],
+  "mounts": [
+    "source=/dev/fuse,target=/dev/fuse,type=bind"
+  ],
+  "entrypoint": "/usr/local/share/agentsh/start-server.sh",
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
+}

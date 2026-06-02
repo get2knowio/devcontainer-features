@@ -1,0 +1,18 @@
+file_rules:
+  - name: allow-workspaces
+    paths: ["/workspace/**", "/workspaces/**"]
+    operations: [read, write, create]
+    decision: allow
+
+network_rules:
+  - name: allow-example-com
+    domains: ["example.com"]
+    ports: [443]
+    decision: allow
+  - name: deny-other-network
+    decision: deny
+
+command_rules:
+  - name: block-env-dump
+    commands: [env, printenv]
+    decision: deny

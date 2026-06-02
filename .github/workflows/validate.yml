@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "src/**/devcontainer-feature.json"
+      - "src/**/README.md"
+      - "README.md"
 
 jobs:
   validate:
@@ -16,3 +18,11 @@ jobs:
         uses: devcontainers/action@v1
         with:
           validate-only: "true"
+
+      - name: Validate agentsh metadata and docs consistency
+        run: |
+          test "$(jq -r .id src/agentsh/devcontainer-feature.json)" = "agentsh"
+          test "$(jq -r .version src/agentsh/devcontainer-feature.json)" = "0.1.0"
+          grep -q "ghcr.io/get2knowio/devcontainer-features/agentsh" README.md
+          grep -q "ghcr.io/get2knowio/devcontainer-features/agentsh:0.1.0" src/agentsh/README.md
+          grep -q "0.20.2" src/agentsh/README.md

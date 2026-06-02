@@ -1,0 +1,94 @@
+file_rules:
+  - name: allow-workspaces
+    paths: ["/workspace/**", "/workspaces/**"]
+    operations: [read, write, create]
+    decision: allow
+  - name: approve-workspace-delete
+    paths: ["/workspace/**", "/workspaces/**"]
+    operations: [delete]
+    decision: approve
+    message: "Delete {{.Path}}?"
+  - name: deny-ssh-private-keys
+    paths: ["**/.ssh/id_*", "**/.ssh/*_rsa", "**/.ssh/*_ed25519"]
+    decision: deny
+  - name: deny-secret-files
+    paths: ["**/.env", "**/.env.*", "**/credentials*", "**/.aws/**"]
+    decision: deny
+
+network_rules:
+  - name: allow-github
+    domains: ["github.com", "api.github.com", "*.githubusercontent.com"]
+    ports: [443]
+    decision: allow
+  - name: allow-package-registries
+    domains:
+      - "registry.npmjs.org"
+      - "pypi.org"
+      - "files.pythonhosted.org"
+      - "crates.io"
+      - "static.crates.io"
+      - "proxy.golang.org"
+      - "sum.golang.org"
+    ports: [443]
+    decision: allow
+  - name: allow-model-apis
+    domains:
+      - "api.openai.com"
+      - "api.anthropic.com"
+      - "generativelanguage.googleapis.com"
+    ports: [443]
+    decision: allow
+  - name: approve-unknown-network
+    decision: approve
+    message: "Approve outbound network access to {{.Destination}}?"
+
+command_rules:
+  - name: block-environment-dump
+    commands: [env, printenv]
+    decision: deny
+  - name: block-dangerous-system-commands
+    commands: [shutdown, reboot, poweroff, halt, mount, umount]
+    decision: deny
+  - name: approve-destructive-delete
+    commands: [rm]
+    args: ["-rf", "-fr"]
+    decision: approve
+    message: "Approve recursive deletion?"
+  - name: allow-basic-development-commands
+    commands:
+      - echo
+      - test
+      - "["
+      - cat
+      - grep
+      - sed
+      - awk
+      - ls
+      - find
+      - pwd
+      - id
+      - uname
+      - true
+      - false
+      - sleep
+      - bash
+      - sh
+      - mkdir
+      - touch
+      - chmod
+      - chown
+      - cp
+      - mv
+      - curl
+      - git
+      - python3
+      - jq
+      - agentsh
+    decision: allow
+
+env_policy:
+  deny:
+    - "AWS_SECRET_ACCESS_KEY"
+    - "GITHUB_TOKEN"
+    - "OPENAI_API_KEY"
+    - "ANTHROPIC_API_KEY"
