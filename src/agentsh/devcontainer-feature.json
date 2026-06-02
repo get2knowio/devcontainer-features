@@ -62,7 +62,11 @@
     "seccomp=unconfined"
   ],
   "mounts": [
-    "source=/dev/fuse,target=/dev/fuse,type=bind"
+    {
+      "source": "/dev/fuse",
+      "target": "/dev/fuse",
+      "type": "bind"
+    }
   ],
   "entrypoint": "/usr/local/share/agentsh/start-server.sh",
   "installsAfter": [
