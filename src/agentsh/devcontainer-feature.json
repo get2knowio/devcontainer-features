@@ -11,8 +11,8 @@
       "description": "Pinned agentsh stable release to install, without the leading v."
     },
     "approvalTimeoutSeconds": {
-      "type": "number",
-      "default": 300,
+      "type": "string",
+      "default": "300",
       "description": "Seconds an approval-required action waits before failing secure (deny)."
     },
     "shimForceNonTty": {
@@ -41,8 +41,8 @@
       "description": "Bind the agentsh REST API on all container interfaces for a sidecar notifier. Requires restApiKey."
     },
     "restPort": {
-      "type": "number",
-      "default": 18080,
+      "type": "string",
+      "default": "18080",
       "description": "Port for the agentsh REST API."
     },
     "restApiKey": {

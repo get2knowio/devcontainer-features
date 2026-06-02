@@ -19,13 +19,13 @@ The installer downloads the pinned upstream agentsh Linux release at build time,
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `version` | string | `0.20.2` | Pinned upstream agentsh stable release without `v`. |
-| `approvalTimeoutSeconds` | number | `300` | Wait before an approval-required action fails secure (deny). |
+| `approvalTimeoutSeconds` | string | `"300"` | Wait before an approval-required action fails secure (deny). |
 | `shimForceNonTty` | boolean | `true` | Enables non-interactive shell shim forcing through `AGENTSH_SHIM_FORCE=1`. |
 | `installShellShims` | boolean | `true` | Replaces `/bin/sh` and `/bin/bash` with the agentsh shim so every shell invocation is mediated. Keep `true` for the secure default. See [Validation Option: installShellShims](#validation-option-installshellshims). |
 | `installDevDependencies` | boolean | `true` | Installs required OS packages on Debian, Ubuntu, and Alpine images. |
 | `policyOverlayPath` | string | `.devcontainer/agentsh-policy.yaml` | Workspace-relative overlay policy path. |
 | `externalRestApi` | boolean | `false` | Bind the agentsh REST API on all container interfaces for an external notifier sidecar. Requires `restApiKey`. |
-| `restPort` | number | `18080` | Port for the agentsh REST API. |
+| `restPort` | string | `"18080"` | Port for the agentsh REST API. |
 | `restApiKey` | string | `""` | API key for REST clients. Required when `externalRestApi` is `true`. |
 
 ## Default Behavior

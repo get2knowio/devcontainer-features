@@ -37,13 +37,13 @@ Runtime declarations:
 | Option | Type | Default | Contract |
 |--------|------|---------|----------|
 | `version` | string | `0.20.2` | Pinned agentsh stable release without `v`; re-check immediately before release |
-| `approvalTimeoutSeconds` | number | `300` | Approval wait before fail-secure deny (config.yaml `approvals.timeout`) |
+| `approvalTimeoutSeconds` | string | `"300"` | Approval wait before fail-secure deny (config.yaml `approvals.timeout`) |
 | `shimForceNonTty` | boolean | `true` | Forces shims for non-interactive agent subprocesses |
 | `installShellShims` | boolean | `true` | Replaces `/bin/sh` and `/bin/bash` with the agentsh shim. `true` is the secure default; `false` is a validation/advanced option that still installs agentsh, policy assets, config, and the shim binary but leaves the system shells unmodified |
 | `installDevDependencies` | boolean | `true` | Installs required OS packages when missing |
 | `policyOverlayPath` | string | `.devcontainer/agentsh-policy.yaml` | Workspace-relative user policy replacement path |
 | `externalRestApi` | boolean | `false` | Binds REST API on all container interfaces for sidecar notifier polling |
-| `restPort` | number | `18080` | REST API port |
+| `restPort` | string | `"18080"` | REST API port |
 | `restApiKey` | string | `""` | API key for REST clients; required when `externalRestApi` is true |
 
 ## Install-Time Contract

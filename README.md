@@ -92,13 +92,13 @@ Canonical URI: `ghcr.io/get2knowio/devcontainer-features/agentsh`
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `version` | string | `0.20.2` | Pinned upstream agentsh release. |
-| `approvalTimeoutSeconds` | number | `300` | Approval timeout before fail-secure deny. |
+| `approvalTimeoutSeconds` | string | `"300"` | Approval timeout before fail-secure deny. |
 | `shimForceNonTty` | boolean | `true` | Force non-TTY shell shim mediation. |
 | `installShellShims` | boolean | `true` | Replace `/bin/sh` and `/bin/bash` with the agentsh shim (secure default). |
 | `installDevDependencies` | boolean | `true` | Install required OS packages. |
 | `policyOverlayPath` | string | `.devcontainer/agentsh-policy.yaml` | Workspace-relative overlay policy. |
 | `externalRestApi` | boolean | `false` | Bind the REST API for an external notifier sidecar. Requires `restApiKey`. |
-| `restPort` | number | `18080` | REST API port. |
+| `restPort` | string | `"18080"` | REST API port. |
 | `restApiKey` | string | `""` | API key required for external REST clients. |
 
 ---
