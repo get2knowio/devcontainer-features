@@ -1,6 +1,6 @@
 {
     "claude_only": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "ghcr.io/devcontainers/features/node:1": {},
             "ai-clis": {
@@ -9,7 +9,7 @@
         }
     },
     "npm_tools_only": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "ghcr.io/devcontainers/features/node:1": {},
             "ai-clis": {

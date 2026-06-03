@@ -1,6 +1,6 @@
 {
     "default": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "agentsh": {
                 "installShellShims": false
@@ -8,7 +8,7 @@
         }
     },
     "malformed-overlay": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "agentsh": {
                 "installShellShims": false
@@ -16,7 +16,7 @@
         }
     },
     "missing-floor": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "agentsh": {
                 "installShellShims": false
@@ -24,7 +24,7 @@
         }
     },
     "approval-timeout": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "agentsh": {
                 "installShellShims": false,
@@ -33,7 +33,7 @@
         }
     },
     "external-rest-api": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "agentsh": {
                 "installShellShims": false,
@@ -43,7 +43,7 @@
         }
     },
     "ubuntu": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "agentsh": {
                 "installShellShims": false
