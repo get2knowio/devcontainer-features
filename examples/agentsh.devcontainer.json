@@ -1,0 +1,9 @@
+{
+    "name": "agentsh-secured-devcontainer",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/get2knowio/devcontainer-features/agentsh:0.1.0": {
+            "approvalTimeoutSeconds": 300
+        }
+    }
+}

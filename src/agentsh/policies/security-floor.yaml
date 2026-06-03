@@ -1,0 +1,15 @@
+version: 1
+name: devcontainer-agentsh
+
+file_rules:
+  - name: deny-agentsh-config-write
+    paths:
+      - "**/.devcontainer/**"
+      - "**/.agentsh/**"
+      - "/etc/agentsh/**"
+      - "/run/agentsh/**"
+      - "/usr/local/share/agentsh/**"
+      - "/usr/local/bin/agentsh"
+      - "/usr/local/bin/agentsh-shell-shim"
+    operations: [write, create, delete]
+    decision: deny

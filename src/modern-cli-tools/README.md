@@ -8,11 +8,11 @@ Installs modern CLI replacements and TUI tools: bat, ripgrep, fd, fzf, eza, zoxi
 |--------|-------------|------|---------|
 | `install` | Comma-separated list of tools to install (e.g. `"bat,ripgrep,fzf"`). When set, only the listed tools are installed. When empty, all tools are installed. | string | `""` |
 | `omit` | Comma-separated list of tools to exclude (e.g. `"neovim,tmux"`). When set, the listed tools are skipped. Applied after `install` filtering. | string | `""` |
-| `jujutsuVersion` | Version of jujutsu to install | string | `0.38.0` |
+| `jujutsuVersion` | Version of jujutsu to install | string | `latest` |
 | `ezaVersion` | Version of eza to install | string | `latest` |
-| `lazygitVersion` | Version of lazygit to install | string | `0.59.0` |
-| `astGrepVersion` | Version of ast-grep to install | string | `0.40.5` |
-| `zellijVersion` | Version of zellij to install | string | `0.43.1` |
+| `lazygitVersion` | Version of lazygit to install | string | `latest` |
+| `astGrepVersion` | Version of ast-grep to install | string | `latest` |
+| `zellijVersion` | Version of zellij to install | string | `latest` |
 | `starshipVersion` | Version of starship to install | string | `latest` |
 
 ## Usage

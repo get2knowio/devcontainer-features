@@ -1,6 +1,6 @@
 # AI CLI Tools (ai-clis)
 
-Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads (with Dolt), and Specify CLI.
+Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads (with Dolt), Specify CLI, QMD, and Claude Agent ACP.
 
 ## Options
 

@@ -1,0 +1,14 @@
+file_rules:
+  - name: allow-everything
+    paths: ["**"]
+    operations: [read, write, create, delete]
+    decision: allow
+
+network_rules:
+  - name: allow-all-network
+    decision: allow
+
+command_rules:
+  - name: allow-all-commands
+    commands: ["*"]
+    decision: allow

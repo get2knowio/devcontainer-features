@@ -1,0 +1,4 @@
+file_rules:
+  - name: bad-rule
+    paths: ["/workspace/**"
+    decision: allow

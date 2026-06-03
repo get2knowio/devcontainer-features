@@ -104,7 +104,16 @@ fi
 # CodeRabbit CLI
 if [ "${CODERABBIT}" = "true" ]; then
     echo "Installing CodeRabbit CLI..."
-    curl -fsSL https://cli.coderabbit.ai/install.sh | CODERABBIT_INSTALL_DIR=/usr/local/bin sh
+    # The upstream installer can exit non-zero even after a successful install
+    # (it prints "Installation complete" then returns exit code 2), which would
+    # abort this script under `set -e`. Tolerate the exit code and verify the
+    # binary actually landed instead.
+    curl -fsSL https://cli.coderabbit.ai/install.sh | CODERABBIT_INSTALL_DIR=/usr/local/bin sh || true
+    if [ -x /usr/local/bin/coderabbit ] || command -v coderabbit >/dev/null 2>&1; then
+        echo "CodeRabbit CLI installed."
+    else
+        echo "Warning: CodeRabbit CLI installation failed"
+    fi
 fi
 
 # Beads - coding agent memory system (depends on Dolt)

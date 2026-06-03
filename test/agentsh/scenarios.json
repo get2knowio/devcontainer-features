@@ -1,0 +1,69 @@
+{
+    "default": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+        "features": {
+            "agentsh": {
+                "installShellShims": false
+            }
+        }
+    },
+    "malformed-overlay": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+        "features": {
+            "agentsh": {
+                "installShellShims": false
+            }
+        }
+    },
+    "missing-floor": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+        "features": {
+            "agentsh": {
+                "installShellShims": false
+            }
+        }
+    },
+    "approval-timeout": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+        "features": {
+            "agentsh": {
+                "installShellShims": false,
+                "approvalTimeoutSeconds": 30
+            }
+        }
+    },
+    "external-rest-api": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+        "features": {
+            "agentsh": {
+                "installShellShims": false,
+                "externalRestApi": true,
+                "restApiKey": "test-notifier-key"
+            }
+        }
+    },
+    "ubuntu": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+        "features": {
+            "agentsh": {
+                "installShellShims": false
+            }
+        }
+    },
+    "debian": {
+        "image": "mcr.microsoft.com/devcontainers/base:debian",
+        "features": {
+            "agentsh": {
+                "installShellShims": false
+            }
+        }
+    },
+    "alpine": {
+        "image": "alpine:3.19",
+        "features": {
+            "agentsh": {
+                "installShellShims": false
+            }
+        }
+    }
+}

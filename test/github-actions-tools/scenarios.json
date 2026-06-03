@@ -1,6 +1,6 @@
 {
     "act_only": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "github-actions-tools": {
                 "install": "act"
@@ -8,7 +8,7 @@
         }
     },
     "actionlint_only": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "github-actions-tools": {
                 "install": "actionlint"

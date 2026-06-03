@@ -1,9 +1,9 @@
 {
     "all_features": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
         "features": {
             "ghcr.io/devcontainers/features/python:1": {},
-            "ghcr.io/devcontainers/features/node:1": {},
+            "ghcr.io/devcontainers/features/node:2": {},
             "ghcr.io/devcontainers/features/rust:1": {},
             "ai-clis": {},
             "modern-cli-tools": {},
