@@ -113,9 +113,12 @@ jobs:
     needs: setup
     # The all-features composition test is broad; skip it on the daily
     # high-risk tier and keep it on full runs (weekly / push / PR / dispatch).
+    # It is a blocking job like the others: a failure marks the run red (so PR
+    # authors catch composition breakage) and surfaces to notify-on-failure on
+    # scheduled/dispatched runs. (It cannot be continue-on-error, or its result
+    # would report as success to the notify gate and never alert.)
     if: needs.setup.outputs.tier != 'daily'
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
