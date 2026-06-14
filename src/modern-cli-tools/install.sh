@@ -191,9 +191,14 @@ if [ "${JUJUTSU}" = "true" ]; then
     esac
     JJ_URL="https://github.com/jj-vcs/jj/releases/download/v${JUJUTSUVERSION}/jj-v${JUJUTSUVERSION}-${JJ_ARCH}-unknown-linux-musl.tar.gz"
     curl -fsSL "$JJ_URL" -o /tmp/jj.tgz
-    tar -xzf /tmp/jj.tgz -C /tmp
-    install /tmp/jj /usr/local/bin/jj
-    rm -f /tmp/jj.tgz /tmp/jj
+    # The jj tarball has a top-level "./" entry; extracting it straight into
+    # /tmp would apply that entry's 0755 mode to /tmp itself, stripping the
+    # 1777 sticky bit and breaking apt's _apt sandbox for anything installed
+    # afterward. Extract into a dedicated throwaway dir instead.
+    mkdir -p /tmp/jj-extract
+    tar -xzf /tmp/jj.tgz -C /tmp/jj-extract
+    install /tmp/jj-extract/jj /usr/local/bin/jj
+    rm -rf /tmp/jj.tgz /tmp/jj-extract
 fi
 
 # zellij
