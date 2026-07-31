@@ -69,3 +69,5 @@ Use `install` to list exactly the CLIs you need — new CLIs added in future rel
 ```
 
 **Requires:** Node.js (installs after `ghcr.io/devcontainers/features/node`)
+
+**uv:** `specifyCli` installs via [uv](https://docs.astral.sh/uv/). This feature installs uv itself if it isn't already present, so no extra feature is required. If you do include a uv-providing feature — this repo's `python-tools`, or one of the community `uv` features — it is ordered first via `installsAfter` and reused, avoiding a duplicate install.
