@@ -16,3 +16,6 @@ jobs:
         uses: devcontainers/action@v1
         with:
           validate-only: "true"
+          # Without this the action scandirs '' and crashes with ENOENT before
+          # reading any metadata. release.yaml passes the same path to publish.
+          base-path-to-features: "./src"

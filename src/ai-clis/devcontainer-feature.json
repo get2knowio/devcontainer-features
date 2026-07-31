@@ -17,6 +17,10 @@
     }
   },
   "installsAfter": [
-    "ghcr.io/devcontainers/features/node"
+    "ghcr.io/devcontainers/features/node",
+    "ghcr.io/get2knowio/devcontainer-features/python-tools",
+    "ghcr.io/va-h/devcontainers-features/uv",
+    "ghcr.io/jsburckhardt/devcontainer-features/uv",
+    "ghcr.io/gvatsal60/dev-container-features/uv"
   ]
 }
