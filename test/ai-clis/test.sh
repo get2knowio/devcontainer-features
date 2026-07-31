@@ -11,6 +11,8 @@ check "coderabbit installed" bash -c "command -v coderabbit"
 check "dolt installed" bash -c "command -v dolt"
 check "beads installed" bash -c "command -v bd"
 check "specify installed" bash -c "command -v specify"
+# Runs the binary, not just PATH lookup — a git-HEAD build can land and be broken.
+check "specify reports a version" bash -c "specify --version"
 check "qmd installed" bash -c "command -v qmd"
 check "claude-agent-acp installed" bash -c "command -v claude-agent-acp"
 

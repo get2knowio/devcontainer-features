@@ -1,6 +1,23 @@
 # AI CLI Tools (ai-clis)
 
-Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads (with Dolt), and Specify CLI.
+Installs AI coding assistant CLIs and agentic development tools: Claude Code, Gemini CLI, OpenAI Codex, GitHub Copilot, OpenCode, CodeRabbit, Beads (with Dolt), Specify CLI, QMD, and Claude Agent ACP.
+
+## Tools
+
+`install` and `omit` take these identifiers:
+
+| Identifier | Tool |
+|------------|------|
+| `claudeCode` | Claude Code |
+| `geminiCli` | Gemini CLI |
+| `codex` | OpenAI Codex |
+| `copilot` | GitHub Copilot |
+| `openCode` | OpenCode |
+| `codeRabbit` | CodeRabbit |
+| `beads` | Beads (installs Dolt as a dependency) |
+| `specifyCli` | Specify CLI (spec-kit) |
+| `qmd` | QMD |
+| `claudeAgentAcp` | Claude Agent ACP |
 
 ## Options
 
