@@ -239,9 +239,11 @@ fi
 ZSHRC="$_REMOTE_USER_HOME/.zshrc"
 
 if [ "${EZA}" = "true" ]; then
-    echo 'alias ls="eza --icons"' >> "$ZSHRC"
-    echo 'alias ll="eza -l --icons"' >> "$ZSHRC"
-    echo 'alias la="eza -la --icons"' >> "$ZSHRC"
+    # --icons takes an optional value (eza >= 0.15.0), so attach it with '='
+    # or a following path argument gets swallowed as the flag's value.
+    echo 'alias ls="eza --icons=auto"' >> "$ZSHRC"
+    echo 'alias ll="eza -l --icons=auto"' >> "$ZSHRC"
+    echo 'alias la="eza -la --icons=auto"' >> "$ZSHRC"
 fi
 
 if [ "${ZOXIDE}" = "true" ]; then
