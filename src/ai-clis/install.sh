@@ -142,7 +142,10 @@ if [ "${SPECIFYCLI}" = "true" ]; then
     fi
     # Ensure ~/.local/bin on PATH for user-installed tools
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$_REMOTE_USER_HOME/.zshrc"
-    su - "$_REMOTE_USER" -c "\"$UV_BIN\" tool install specify-cli --from git+https://github.com/github/spec-kit.git" || echo "Warning: Specify CLI installation failed"
+    # Install from PyPI rather than git. `--from git+...` with no `@vX.Y.Z` ref
+    # builds the default branch, so every image picked up unreleased HEAD and two
+    # builds a day apart could differ. PyPI tracks tagged releases instead.
+    su - "$_REMOTE_USER" -c "\"$UV_BIN\" tool install specify-cli" || echo "Warning: Specify CLI installation failed"
 fi
 
 # QMD - on-device search engine for markdown notes and documents
